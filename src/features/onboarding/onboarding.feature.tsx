@@ -1,33 +1,55 @@
 import React from 'react';
+import { ImageBackground, StyleSheet } from 'react-native';
 import Onboarding from 'react-native-onboarding-swiper';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import useNavigationHook from '@hooks/use-navigation';
+
 import {
-  DoneButton,
   SkipButton,
   NextButton,
+  DoneButton,
 } from './components/onboarding.buttons';
-import { onboardingPages } from './constants/onboarding.pages';
+
+import { ONBOARDING_PAGES } from './constants/onboarding.constants';
+import useNavigationHook from '@hooks/use-navigation';
 
 const OnboardingFeature = () => {
   const navigation = useNavigationHook();
 
   const handleComplete = async () => {
-    await AsyncStorage.setItem('onboardingCompleted', 'true');
+    // await AsyncStorage.setItem('onboardingCompleted', 'true');
     navigation.navigate('Login');
   };
 
   return (
-    <Onboarding
-      onSkip={handleComplete}
-      onDone={handleComplete}
-      bottomBarHighlight={false}
-      SkipButtonComponent={SkipButton}
-      NextButtonComponent={NextButton}
-      DoneButtonComponent={DoneButton}
-      pages={onboardingPages}
-    />
+    <ImageBackground
+      source={require('../../assets/img/mesh-purple.jpg')}
+      style={styles.container}
+      resizeMode="cover"
+    >
+      <Onboarding
+        onDone={handleComplete}
+        onSkip={handleComplete}
+        bottomBarHighlight={false}
+        containerStyles={styles.onboardingContainer}
+        imageContainerStyles={styles.imageContainer}
+        SkipButtonComponent={SkipButton}
+        NextButtonComponent={NextButton}
+        DoneButtonComponent={DoneButton}
+        pages={ONBOARDING_PAGES}
+      />
+    </ImageBackground>
   );
 };
 
 export default OnboardingFeature;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  onboardingContainer: {
+    flex: 1,
+  },
+  imageContainer: {
+    paddingBottom: 0,
+  },
+});
