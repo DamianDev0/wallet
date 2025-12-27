@@ -4,8 +4,23 @@ import { typography } from '@theme/config/typography';
 import { spacing } from '@theme/config/spacing';
 import { lightColors } from '@theme/colors/colors';
 
-export const styles = StyleSheet.create({
+export const onboardingStyles = StyleSheet.create({
+  // Main container styles
   container: {
+    flex: 1,
+    backgroundColor: lightColors.background,
+  },
+
+  onboardingContainer: {
+    flex: 1,
+  },
+
+  imageContainer: {
+    paddingBottom: 0,
+  },
+
+  // Page content styles
+  pageContainer: {
     flex: 1,
     backgroundColor: lightColors.background,
     justifyContent: 'center',
@@ -21,7 +36,7 @@ export const styles = StyleSheet.create({
   },
 
   image: {
-    width: width * 2.1,
+    width: width * 1.5,
     height: height * 1,
     resizeMode: 'contain',
   },
@@ -41,5 +56,16 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     paddingHorizontal: spacing.xl,
     maxWidth: width * 0.85,
+  },
+
+  // Button styles
+  doneButtonContainer: {
+    width: width * 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  doneButton: {
+    width: width * 0.9,
   },
 });

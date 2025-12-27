@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 import Onboarding from 'react-native-onboarding-swiper';
 
 import {
@@ -9,8 +9,8 @@ import {
 } from './components/onboarding.buttons';
 
 import { ONBOARDING_PAGES } from './constants/onboarding.constants';
+import { onboardingStyles } from './styles/onboarding.styles';
 import useNavigationHook from '@hooks/use-navigation';
-import { lightColors } from '@theme/colors/colors';
 
 const OnboardingFeature = () => {
   const navigation = useNavigationHook();
@@ -21,13 +21,13 @@ const OnboardingFeature = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={onboardingStyles.container}>
       <Onboarding
         onDone={handleComplete}
         onSkip={handleComplete}
         bottomBarHighlight={false}
-        containerStyles={styles.onboardingContainer}
-        imageContainerStyles={styles.imageContainer}
+        containerStyles={onboardingStyles.onboardingContainer}
+        imageContainerStyles={onboardingStyles.imageContainer}
         SkipButtonComponent={SkipButton}
         NextButtonComponent={NextButton}
         DoneButtonComponent={DoneButton}
@@ -38,16 +38,3 @@ const OnboardingFeature = () => {
 };
 
 export default OnboardingFeature;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: lightColors.background,
-  },
-  onboardingContainer: {
-    flex: 1,
-  },
-  imageContainer: {
-    paddingBottom: 0,
-  },
-});
