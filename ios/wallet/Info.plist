@@ -34,7 +34,7 @@
 		<true/>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string/>
 	<key>RCTNewArchEnabled</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
@@ -51,5 +51,19 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Technor-Medium.otf</string>
+		<string>Technor-Semibold.otf</string>
+		<string>Poppins-Medium.otf</string>
+		<string>Poppins-SemiBold.otf</string>
+		<string>Poppins-Thin.otf</string>
+		<string>Poppins-Bold.otf</string>
+		<string>Poppins-Black.otf</string>
+		<string>Poppins-BlackItalic.otf</string>
+		<string>Poppins-Regular.otf</string>
+		<string>Technor-Regular.otf</string>
+		<string>Poppins-ExtraBold.otf</string>
+	</array>
 </dict>
 </plist>

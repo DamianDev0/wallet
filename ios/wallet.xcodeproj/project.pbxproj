@@ -7,11 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0C80B921A6F3F58F76C31292 /* libPods-wallet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-wallet.a */; };
+		0F71AA72474249BEA6D87449 /* Poppins-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E8F8A107B0D4CF7886D6604 /* Poppins-Black.otf */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
+		16219085E8C84E4AB9791792 /* Poppins-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6B8758F5611D472DB7129C5C /* Poppins-SemiBold.otf */; };
+		3543455A82D74CB8A059C552 /* Poppins-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 289C79E235FE486DB9ABB2D3 /* Poppins-Thin.otf */; };
+		3A736AADC9AD41FF91F908CB /* Poppins-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = E631012C8CB442F7A1E0EEFD /* Poppins-Medium.otf */; };
+		3E17B0244703456C9B4B99E0 /* Poppins-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = FA8ECEE82B584812A8AF2470 /* Poppins-Bold.otf */; };
+		68DE229ACD6B47118650FAD1 /* Poppins-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6D8F8343F8754D60ABF70047 /* Poppins-BlackItalic.otf */; };
 		761780ED2CA45674006654EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761780EC2CA45674006654EE /* AppDelegate.swift */; };
+		7DCDD9916BD941A485AAC7E1 /* Technor-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9970EDEB5349468FA08B5E3E /* Technor-Semibold.otf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		86F11F8A8347F7E902D72666 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */; };
+		AE664C6F88A608F8B0F71E31 /* libPods-wallet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC9CB4FEEC543057A2CCB227 /* libPods-wallet.a */; };
+		CC269576ECF749DE86FAFB2F /* Poppins-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = B4AB85F01A7448EE9EA097A8 /* Poppins-Regular.otf */; };
+		D8527FC7BB1C4223811075BA /* Technor-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = E9513AE8CE4D42D3826B062E /* Technor-Regular.otf */; };
+		DBB668FF1E814946AA6B6744 /* Technor-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = B1D37AACED144CB891E69117 /* Technor-Medium.otf */; };
+		EF57431AEECE4CBC8ECE103F /* Poppins-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1C646F20C6FA4914A5A8FA79 /* Poppins-ExtraBold.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,12 +30,23 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = wallet/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = wallet/Info.plist; sourceTree = "<group>"; };
 		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = wallet/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		3B4392A12AC88292D35C810B /* Pods-wallet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wallet.debug.xcconfig"; path = "Target Support Files/Pods-wallet/Pods-wallet.debug.xcconfig"; sourceTree = "<group>"; };
-		5709B34CF0A7D63546082F79 /* Pods-wallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wallet.release.xcconfig"; path = "Target Support Files/Pods-wallet/Pods-wallet.release.xcconfig"; sourceTree = "<group>"; };
-		5DCACB8F33CDC322A6C60F78 /* libPods-wallet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-wallet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1C646F20C6FA4914A5A8FA79 /* Poppins-ExtraBold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-ExtraBold.otf"; path = "../src/assets/fonts/Poppins-ExtraBold.otf"; sourceTree = "<group>"; };
+		289C79E235FE486DB9ABB2D3 /* Poppins-Thin.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Thin.otf"; path = "../src/assets/fonts/Poppins-Thin.otf"; sourceTree = "<group>"; };
+		6B8758F5611D472DB7129C5C /* Poppins-SemiBold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-SemiBold.otf"; path = "../src/assets/fonts/Poppins-SemiBold.otf"; sourceTree = "<group>"; };
+		6D8F8343F8754D60ABF70047 /* Poppins-BlackItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-BlackItalic.otf"; path = "../src/assets/fonts/Poppins-BlackItalic.otf"; sourceTree = "<group>"; };
+		6E8F8A107B0D4CF7886D6604 /* Poppins-Black.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Black.otf"; path = "../src/assets/fonts/Poppins-Black.otf"; sourceTree = "<group>"; };
 		761780EC2CA45674006654EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = wallet/AppDelegate.swift; sourceTree = "<group>"; };
+		815D364E20EC0A2662BE5DF1 /* Pods-wallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wallet.release.xcconfig"; path = "Target Support Files/Pods-wallet/Pods-wallet.release.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = wallet/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8972BD478368D9C3C8747E17 /* Pods-wallet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wallet.debug.xcconfig"; path = "Target Support Files/Pods-wallet/Pods-wallet.debug.xcconfig"; sourceTree = "<group>"; };
+		9970EDEB5349468FA08B5E3E /* Technor-Semibold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Technor-Semibold.otf"; path = "../src/assets/fonts/Technor-Semibold.otf"; sourceTree = "<group>"; };
+		B1D37AACED144CB891E69117 /* Technor-Medium.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Technor-Medium.otf"; path = "../src/assets/fonts/Technor-Medium.otf"; sourceTree = "<group>"; };
+		B4AB85F01A7448EE9EA097A8 /* Poppins-Regular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Regular.otf"; path = "../src/assets/fonts/Poppins-Regular.otf"; sourceTree = "<group>"; };
+		CC9CB4FEEC543057A2CCB227 /* libPods-wallet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-wallet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E631012C8CB442F7A1E0EEFD /* Poppins-Medium.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Medium.otf"; path = "../src/assets/fonts/Poppins-Medium.otf"; sourceTree = "<group>"; };
+		E9513AE8CE4D42D3826B062E /* Technor-Regular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Technor-Regular.otf"; path = "../src/assets/fonts/Technor-Regular.otf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		FA8ECEE82B584812A8AF2470 /* Poppins-Bold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Bold.otf"; path = "../src/assets/fonts/Poppins-Bold.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,7 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C80B921A6F3F58F76C31292 /* libPods-wallet.a in Frameworks */,
+				AE664C6F88A608F8B0F71E31 /* libPods-wallet.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -55,9 +77,28 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				5DCACB8F33CDC322A6C60F78 /* libPods-wallet.a */,
+				CC9CB4FEEC543057A2CCB227 /* libPods-wallet.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		65F5DD32E1AF44C197D05413 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B1D37AACED144CB891E69117 /* Technor-Medium.otf */,
+				9970EDEB5349468FA08B5E3E /* Technor-Semibold.otf */,
+				E631012C8CB442F7A1E0EEFD /* Poppins-Medium.otf */,
+				6B8758F5611D472DB7129C5C /* Poppins-SemiBold.otf */,
+				289C79E235FE486DB9ABB2D3 /* Poppins-Thin.otf */,
+				FA8ECEE82B584812A8AF2470 /* Poppins-Bold.otf */,
+				6E8F8A107B0D4CF7886D6604 /* Poppins-Black.otf */,
+				6D8F8343F8754D60ABF70047 /* Poppins-BlackItalic.otf */,
+				B4AB85F01A7448EE9EA097A8 /* Poppins-Regular.otf */,
+				E9513AE8CE4D42D3826B062E /* Technor-Regular.otf */,
+				1C646F20C6FA4914A5A8FA79 /* Poppins-ExtraBold.otf */,
+			);
+			name = Resources;
+			path = "";
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -75,6 +116,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				65F5DD32E1AF44C197D05413 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -92,8 +134,8 @@
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				3B4392A12AC88292D35C810B /* Pods-wallet.debug.xcconfig */,
-				5709B34CF0A7D63546082F79 /* Pods-wallet.release.xcconfig */,
+				8972BD478368D9C3C8747E17 /* Pods-wallet.debug.xcconfig */,
+				815D364E20EC0A2662BE5DF1 /* Pods-wallet.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -105,13 +147,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "wallet" */;
 			buildPhases = (
-				C38B50BA6285516D6DCD4F65 /* [CP] Check Pods Manifest.lock */,
+				003B4D610379A97B43AA84FF /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				00EEFC60759A1932668264C0 /* [CP] Embed Pods Frameworks */,
-				E235C05ADACE081382539298 /* [CP] Copy Pods Resources */,
+				223617469FD013C26320AEA9 /* [CP] Embed Pods Frameworks */,
+				4C8EB00B282E62F510A547AA /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -161,46 +203,24 @@
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				86F11F8A8347F7E902D72666 /* PrivacyInfo.xcprivacy in Resources */,
+				DBB668FF1E814946AA6B6744 /* Technor-Medium.otf in Resources */,
+				7DCDD9916BD941A485AAC7E1 /* Technor-Semibold.otf in Resources */,
+				3A736AADC9AD41FF91F908CB /* Poppins-Medium.otf in Resources */,
+				16219085E8C84E4AB9791792 /* Poppins-SemiBold.otf in Resources */,
+				3543455A82D74CB8A059C552 /* Poppins-Thin.otf in Resources */,
+				3E17B0244703456C9B4B99E0 /* Poppins-Bold.otf in Resources */,
+				0F71AA72474249BEA6D87449 /* Poppins-Black.otf in Resources */,
+				68DE229ACD6B47118650FAD1 /* Poppins-BlackItalic.otf in Resources */,
+				CC269576ECF749DE86FAFB2F /* Poppins-Regular.otf in Resources */,
+				D8527FC7BB1C4223811075BA /* Technor-Regular.otf in Resources */,
+				EF57431AEECE4CBC8ECE103F /* Poppins-ExtraBold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/.xcode.env.local",
-				"$(SRCROOT)/.xcode.env",
-			);
-			name = "Bundle React Native code and images";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"$REACT_NATIVE_PATH/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"$REACT_NATIVE_PATH/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"\\\"$WITH_ENVIRONMENT\\\" \\\"$REACT_NATIVE_XCODE\\\"\"\n";
-		};
-		00EEFC60759A1932668264C0 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-wallet/Pods-wallet-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-wallet/Pods-wallet-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-wallet/Pods-wallet-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C38B50BA6285516D6DCD4F65 /* [CP] Check Pods Manifest.lock */ = {
+		003B4D610379A97B43AA84FF /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -222,7 +242,40 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E235C05ADACE081382539298 /* [CP] Copy Pods Resources */ = {
+		00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/.xcode.env.local",
+				"$(SRCROOT)/.xcode.env",
+			);
+			name = "Bundle React Native code and images";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"$REACT_NATIVE_PATH/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"$REACT_NATIVE_PATH/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"\\\"$WITH_ENVIRONMENT\\\" \\\"$REACT_NATIVE_XCODE\\\"\"\n";
+		};
+		223617469FD013C26320AEA9 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-wallet/Pods-wallet-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-wallet/Pods-wallet-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-wallet/Pods-wallet-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4C8EB00B282E62F510A547AA /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -255,7 +308,7 @@
 /* Begin XCBuildConfiguration section */
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3B4392A12AC88292D35C810B /* Pods-wallet.debug.xcconfig */;
+			baseConfigurationReference = 8972BD478368D9C3C8747E17 /* Pods-wallet.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -283,7 +336,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5709B34CF0A7D63546082F79 /* Pods-wallet.release.xcconfig */;
+			baseConfigurationReference = 815D364E20EC0A2662BE5DF1 /* Pods-wallet.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ImageBackground, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import Onboarding from 'react-native-onboarding-swiper';
 
 import {
@@ -10,6 +10,7 @@ import {
 
 import { ONBOARDING_PAGES } from './constants/onboarding.constants';
 import useNavigationHook from '@hooks/use-navigation';
+import { lightColors } from '@theme/colors/colors';
 
 const OnboardingFeature = () => {
   const navigation = useNavigationHook();
@@ -20,11 +21,7 @@ const OnboardingFeature = () => {
   };
 
   return (
-    <ImageBackground
-      source={require('../../assets/img/mesh-purple.jpg')}
-      style={styles.container}
-      resizeMode="cover"
-    >
+    <View style={styles.container}>
       <Onboarding
         onDone={handleComplete}
         onSkip={handleComplete}
@@ -36,7 +33,7 @@ const OnboardingFeature = () => {
         DoneButtonComponent={DoneButton}
         pages={ONBOARDING_PAGES}
       />
-    </ImageBackground>
+    </View>
   );
 };
 
@@ -45,6 +42,7 @@ export default OnboardingFeature;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: lightColors.background,
   },
   onboardingContainer: {
     flex: 1,

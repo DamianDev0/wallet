@@ -20,7 +20,7 @@ export const Text = ({
 
   const variantStyles = {
     body: {
-      fontSize: theme.typography.sizes.md,
+      fontSize: theme.typography.sizes.sm,
       fontWeight: theme.typography.weights.regular as any,
     },
     heading: {
@@ -28,7 +28,7 @@ export const Text = ({
       fontWeight: theme.typography.weights.bold as any,
     },
     title: {
-      fontSize: theme.typography.sizes.title,
+      fontSize: theme.typography.sizes.lg,
       fontWeight: theme.typography.weights.bold as any,
     },
     caption: {

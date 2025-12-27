@@ -1,6 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
-import { Activity, Heart, Sparkles } from 'lucide-react-native';
+import { View, Image } from 'react-native';
 import { styles } from '../styles/onboarding.styles';
 
 interface OnboardingPage {
@@ -12,6 +11,9 @@ interface OnboardingPage {
   subTitleStyles: object;
 }
 
+const IMAGE_URL =
+  'https://res.cloudinary.com/dpqbn1gqb/image/upload/v1766448615/mobile_qbuino.png';
+
 const IconWrapper = ({ children }: { children: React.ReactNode }) => (
   <View style={styles.iconWrapper}>{children}</View>
 );
@@ -21,12 +23,12 @@ export const ONBOARDING_PAGES: OnboardingPage[] = [
     backgroundColor: 'transparent',
     image: (
       <IconWrapper>
-        <Sparkles size={120} color="#fff" />
+        <Image source={{ uri: IMAGE_URL }} style={styles.image} />
       </IconWrapper>
     ),
-    title: 'Welcome',
+    title: 'All Your Transactions in One Place',
     subtitle:
-      'Build healthy habits and improve your daily routine with simple actions.',
+      'Visualize every movement of your money in real time. Track income, expenses, and transfers clearly and securely.',
     titleStyles: styles.title,
     subTitleStyles: styles.subtitle,
   },
@@ -34,11 +36,12 @@ export const ONBOARDING_PAGES: OnboardingPage[] = [
     backgroundColor: 'transparent',
     image: (
       <IconWrapper>
-        <Heart size={120} color="#fff" />
+        <Image source={{ uri: IMAGE_URL }} style={styles.image} />
       </IconWrapper>
     ),
-    title: 'Mind & Balance',
-    subtitle: 'Track your progress and take care of your mental well-being.',
+    title: 'Smart Savings & Expense Control',
+    subtitle:
+      'Understand where your money goes. Analyze spending patterns, manage budgets, and grow your savings with clarity.',
     titleStyles: styles.title,
     subTitleStyles: styles.subtitle,
   },
@@ -46,11 +49,12 @@ export const ONBOARDING_PAGES: OnboardingPage[] = [
     backgroundColor: 'transparent',
     image: (
       <IconWrapper>
-        <Activity size={120} color="#fff" />
+        <Image source={{ uri: IMAGE_URL }} style={styles.image} />
       </IconWrapper>
     ),
-    title: 'Stay Active',
-    subtitle: 'Monitor your activity and stay motivated every single day.',
+    title: 'Full Financial Overview',
+    subtitle:
+      'Get a complete financial snapshot. Balance, transactions, savings, and insights designed to help you make better decisions.',
     titleStyles: styles.title,
     subTitleStyles: styles.subtitle,
   },

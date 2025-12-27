@@ -5,6 +5,7 @@ import {
   StyleSheet,
   ActivityIndicator,
   View,
+  ViewStyle,
 } from 'react-native';
 import { useTheme } from '../../contexts/ThemeContext';
 import { Text } from '../atoms/Text';
@@ -29,7 +30,7 @@ export const Button = ({
   style,
   ...props
 }: ButtonProps) => {
-  const { theme, isDark } = useTheme();
+  const { theme, } = useTheme();
 
   const sizeStyles = {
     sm: {
@@ -40,7 +41,7 @@ export const Button = ({
     md: {
       height: 48,
       paddingHorizontal: theme.spacing.lg,
-      fontSize: theme.typography.sizes.md,
+      fontSize: theme.typography.sizes.base,
     },
     lg: {
       height: 56,
@@ -80,18 +81,20 @@ export const Button = ({
 
   return (
     <Pressable
-      style={({ pressed }) => [
-        styles.button,
-        {
-          height: sizeStyles[size].height,
-          paddingHorizontal: sizeStyles[size].paddingHorizontal,
-        },
-        variantStyles[variant],
-        fullWidth && styles.fullWidth,
-        isDisabled && styles.disabled,
-        pressed && !isDisabled && styles.pressed,
-        style,
-      ]}
+      style={({ pressed }) => {
+        const baseStyle = [
+          styles.button,
+          {
+            height: sizeStyles[size].height,
+            paddingHorizontal: sizeStyles[size].paddingHorizontal,
+          },
+          variantStyles[variant],
+          fullWidth && styles.fullWidth,
+          isDisabled && styles.disabled,
+          pressed && !isDisabled && styles.pressed,
+        ].filter(Boolean) as ViewStyle[];
+        return [baseStyle, style] as any;
+      }}
       disabled={isDisabled}
       {...props}>
       {loading ? (

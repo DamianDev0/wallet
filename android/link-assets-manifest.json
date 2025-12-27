@@ -1,0 +1,49 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/fonts/Technor-Medium.otf",
+      "sha1": "474a6866f360d3badf9cc517c9d6da4569f0835b"
+    },
+    {
+      "path": "src/assets/fonts/Technor-Semibold.otf",
+      "sha1": "bc211e195fe741e2395e09e4c6938c911f8f3d1a"
+    },
+    {
+      "path": "src/assets/fonts/Poppins-Medium.otf",
+      "sha1": "1f1fe7aec1f3f463652475a65506541287897121"
+    },
+    {
+      "path": "src/assets/fonts/Poppins-SemiBold.otf",
+      "sha1": "7bf58d62ba52d04db4ff9a075c493804205a0ceb"
+    },
+    {
+      "path": "src/assets/fonts/Poppins-Thin.otf",
+      "sha1": "0c0648dbb1587c6dca37dc01cc1824de43f226fa"
+    },
+    {
+      "path": "src/assets/fonts/Poppins-Bold.otf",
+      "sha1": "2c2490b2542b1d8c162d00d5832028189c989285"
+    },
+    {
+      "path": "src/assets/fonts/Poppins-Black.otf",
+      "sha1": "6849186fb118aab55c126d7ac37a3f620fee143c"
+    },
+    {
+      "path": "src/assets/fonts/Poppins-BlackItalic.otf",
+      "sha1": "be70375007e4d17187bda3ea3692754c08dea447"
+    },
+    {
+      "path": "src/assets/fonts/Poppins-Regular.otf",
+      "sha1": "01acbc5f137475803ca2cace1e740cf1a28834af"
+    },
+    {
+      "path": "src/assets/fonts/Technor-Regular.otf",
+      "sha1": "95579508c4cf57d9cf9f9c169faa74c654d2d2e3"
+    },
+    {
+      "path": "src/assets/fonts/Poppins-ExtraBold.otf",
+      "sha1": "1e18feabdee10d82f1bd39bb8e1a322d9459d8f9"
+    }
+  ]
+}
