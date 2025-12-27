@@ -55,7 +55,11 @@ export const Input = ({
         <TextInput
           style={[
             styles.input,
-            { color: theme.colors.text },
+            {
+              color: theme.colors.text,
+              fontFamily: theme.typography.families.poppins.regular,
+              fontSize: theme.typography.sizes.base,
+            },
             leftIcon ? styles.inputWithLeftIcon : undefined,
             rightIcon ? styles.inputWithRightIcon : undefined,
             style,
@@ -100,8 +104,6 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    fontSize: 16,
-    fontFamily: 'System',
   },
   inputWithLeftIcon: {
     marginLeft: 8,

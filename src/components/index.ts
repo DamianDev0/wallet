@@ -1,6 +1,7 @@
 // Atoms
 export { Text } from './atoms/Text';
 export { Container } from './atoms/Container';
+export { Link } from './atoms/Link';
 
 // Molecules
 export { Button } from './molecules/Button';

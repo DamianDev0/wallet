@@ -30,23 +30,23 @@ export const Button = ({
   style,
   ...props
 }: ButtonProps) => {
-  const { theme, } = useTheme();
+  const { theme } = useTheme();
 
   const sizeStyles = {
     sm: {
       height: 36,
       paddingHorizontal: theme.spacing.md,
-      fontSize: theme.typography.sizes.sm,
+      textVariant: 'body-sm' as const,
     },
     md: {
       height: 48,
       paddingHorizontal: theme.spacing.lg,
-      fontSize: theme.typography.sizes.base,
+      textVariant: 'button' as const,
     },
     lg: {
       height: 56,
       paddingHorizontal: theme.spacing.xl,
-      fontSize: theme.typography.sizes.lg,
+      textVariant: 'body-lg' as const,
     },
   };
 
@@ -103,14 +103,10 @@ export const Button = ({
         <View style={styles.content}>
           {icon && <View style={styles.icon}>{icon}</View>}
           <Text
-            style={[
-              styles.text,
-              {
-                color: textColors[variant],
-                fontSize: sizeStyles[size].fontSize,
-              },
-            ]}
-            weight="medium">
+            variant={sizeStyles[size].textVariant}
+            weight="semiBold"
+            color={textColors[variant]}
+            style={styles.text}>
             {title}
           </Text>
         </View>

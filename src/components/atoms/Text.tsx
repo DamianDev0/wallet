@@ -1,15 +1,43 @@
 import React from 'react';
-import { Text as RNText, TextProps as RNTextProps, StyleSheet } from 'react-native';
-import { useTheme } from '../../contexts/ThemeContext';
+import { Text as RNText, TextProps as RNTextProps } from 'react-native';
+import { useTheme } from '@contexts/ThemeContext';
+
+type TextVariant =
+  | 'title-xxl'
+  | 'title-xl'
+  | 'title-lg'
+  | 'title-md'
+  | 'title-sm'
+  | 'body-lg'
+  | 'body-md'
+  | 'body-sm'
+  | 'body-xs'
+  | 'numeric-xxl'
+  | 'numeric-xl'
+  | 'numeric-lg'
+  | 'numeric-md'
+  | 'numeric-sm'
+  | 'button'
+  | 'label'
+  | 'caption';
+
+type FontWeight =
+  | 'thin'
+  | 'regular'
+  | 'medium'
+  | 'semiBold'
+  | 'bold'
+  | 'extraBold'
+  | 'black';
 
 interface TextProps extends RNTextProps {
-  variant?: 'body' | 'heading' | 'title' | 'caption';
+  variant?: TextVariant;
   color?: string;
-  weight?: 'regular' | 'medium' | 'bold';
+  weight?: FontWeight;
 }
 
 export const Text = ({
-  variant = 'body',
+  variant = 'body-md',
   color,
   weight,
   style,
@@ -18,46 +46,47 @@ export const Text = ({
 }: TextProps) => {
   const { theme } = useTheme();
 
-  const variantStyles = {
-    body: {
-      fontSize: theme.typography.sizes.sm,
-      fontWeight: theme.typography.weights.regular as any,
-    },
-    heading: {
-      fontSize: theme.typography.sizes.xl,
-      fontWeight: theme.typography.weights.bold as any,
-    },
-    title: {
-      fontSize: theme.typography.sizes.lg,
-      fontWeight: theme.typography.weights.bold as any,
-    },
-    caption: {
-      fontSize: theme.typography.sizes.sm,
-      fontWeight: theme.typography.weights.regular as any,
-    },
+  const variants = {
+    'title-xxl': theme.typography.titles.xxl,
+    'title-xl': theme.typography.titles.xl,
+    'title-lg': theme.typography.titles.lg,
+    'title-md': theme.typography.titles.md,
+    'title-sm': theme.typography.titles.sm,
+    'body-lg': theme.typography.body.lg,
+    'body-md': theme.typography.body.md,
+    'body-sm': theme.typography.body.sm,
+    'body-xs': theme.typography.body.xs,
+    'numeric-xxl': theme.typography.numeric.xxl,
+    'numeric-xl': theme.typography.numeric.xl,
+    'numeric-lg': theme.typography.numeric.lg,
+    'numeric-md': theme.typography.numeric.md,
+    'numeric-sm': theme.typography.numeric.sm,
+    button: theme.typography.ui.button,
+    label: theme.typography.ui.label,
+    caption: theme.typography.ui.caption,
   };
 
-  const weightStyles = weight
-    ? { fontWeight: theme.typography.weights[weight] as any }
-    : {};
+  const fontWeights = {
+    thin: theme.typography.families.poppins.thin,
+    regular: theme.typography.families.poppins.regular,
+    medium: theme.typography.families.poppins.medium,
+    semiBold: theme.typography.families.poppins.semiBold,
+    bold: theme.typography.families.poppins.bold,
+    extraBold: theme.typography.families.poppins.extraBold,
+    black: theme.typography.families.poppins.black,
+  };
 
   return (
     <RNText
+      {...props}
       style={[
-        styles.text,
+        variants[variant],
+        weight && { fontFamily: fontWeights[weight] },
         { color: color || theme.colors.text },
-        variantStyles[variant],
-        weightStyles,
         style,
       ]}
-      {...props}>
+    >
       {children}
     </RNText>
   );
 };
-
-const styles = StyleSheet.create({
-  text: {
-    fontFamily: 'System',
-  },
-});

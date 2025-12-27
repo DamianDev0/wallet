@@ -2,6 +2,7 @@ import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import type { PublicNavigationRoutes } from '../../types/public-routes.type';
 import Onboarding from '@screens/public/Onboarding';
+import Welcome from '@screens/public/Welcome';
 import SignUp from '@screens/public/SignUp';
 import Login from '@screens/public/Login';
 
@@ -13,6 +14,7 @@ export const PublicNavigation = () => {
       initialRouteName="Onboarding"
       screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Onboarding" component={Onboarding} />
+      <Stack.Screen name="Welcome" component={Welcome} />
       <Stack.Screen name="SignUp" component={SignUp} />
       <Stack.Screen name="Login" component={Login} />
     </Stack.Navigator>

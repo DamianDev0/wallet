@@ -17,7 +17,7 @@ const OnboardingFeature = () => {
 
   const handleComplete = async () => {
     // await AsyncStorage.setItem('onboardingCompleted', 'true');
-    navigation.navigate('Login');
+    navigation.navigate('Welcome');
   };
 
   return (
