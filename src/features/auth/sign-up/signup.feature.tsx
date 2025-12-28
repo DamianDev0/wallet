@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Image } from 'react-native';
-import { Container, Text, Input, Button, Link, GoogleButton } from '@components/index';
+import { Container, Text, Input, Button, Link } from '@components/index';
 import { ScreenHeader } from '@components/organisms';
 import useNavigationHook from '@hooks/use-navigation';
 import { signupStyles } from './styles/signup.styles';
@@ -56,21 +56,21 @@ const SignUpFeature = () => {
 
               <View style={signupStyles.dividerContainer}>
                 <View style={signupStyles.dividerLine} />
-                <Text variant="body-sm" style={signupStyles.dividerText}>
+                {/* <Text variant="body-sm" style={signupStyles.dividerText}>
                   or continue with
-                </Text>
+                </Text> */}
                 <View style={signupStyles.dividerLine} />
               </View>
 
-              <GoogleButton
+              {/* <GoogleButton
                 title="Sign Up with Google"
                 size="md"
-              />
+              /> */}
 
               <View style={signupStyles.loginTextContainer}>
                 <Text variant="body-md" style={signupStyles.loginText}>
                   Already have an account?{' '}
-                  <Link onPress={handleLogin}>Login</Link>
+                  <Link onPress={handleLogin} variant='body-md' >Login</Link>
                 </Text>
               </View>
             </View>

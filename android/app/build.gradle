@@ -117,3 +117,10 @@ dependencies {
         implementation jscFlavor
     }
 }
+
+// Needed for react-native-worklets-core with new architecture
+configurations.all {
+    resolutionStrategy {
+        force "com.facebook.react:hermes-android:+"
+    }
+}
