@@ -1,12 +1,13 @@
 import React from 'react';
 import { Image, StyleSheet } from 'react-native';
 import { Button } from './Button';
+import { TextWeight } from '@type/text.types';
 
 interface GoogleButtonProps {
   title: string;
   onPress?: () => void;
   size?: 'sm' | 'md' | 'lg';
-  textWeight?: 'regular' | 'medium' | 'semibold' | 'bold';
+  textWeight?: TextWeight
   fullWidth?: boolean;
 }
 

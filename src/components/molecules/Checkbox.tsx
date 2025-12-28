@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import { View, StyleSheet, Pressable } from 'react-native';
 import { useTheme } from '../../contexts/ThemeContext';

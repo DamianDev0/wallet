@@ -9,15 +9,8 @@ import {
 } from 'react-native';
 import { useTheme } from '../../contexts/ThemeContext';
 import { Text } from '../atoms/Text';
+import { TextWeight } from '@type/text.types';
 
-type TextWeight =
-  | 'thin'
-  | 'regular'
-  | 'medium'
-  | 'semiBold'
-  | 'bold'
-  | 'extraBold'
-  | 'black';
 
 interface ButtonProps extends Omit<PressableProps, 'children'> {
   title: string;

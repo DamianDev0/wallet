@@ -60,7 +60,7 @@ export const Alert = ({
       <View style={styles.content}>
         {title && (
           <Text
-            variant="body"
+            variant="body-md"
             weight="bold"
             style={[styles.title, { color: colors.text }]}>
             {title}

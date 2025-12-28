@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text as RNText, TextProps as RNTextProps } from 'react-native';
 import { useTheme } from '@contexts/ThemeContext';
+import { TextWeight } from '@type/text.types';
 
 type TextVariant =
   | 'title-xxl'
@@ -21,19 +22,12 @@ type TextVariant =
   | 'label'
   | 'caption';
 
-type FontWeight =
-  | 'thin'
-  | 'regular'
-  | 'medium'
-  | 'semiBold'
-  | 'bold'
-  | 'extraBold'
-  | 'black';
+
 
 interface TextProps extends RNTextProps {
   variant?: TextVariant;
   color?: string;
-  weight?: FontWeight;
+  weight?: TextWeight;
 }
 
 export const Text = ({
