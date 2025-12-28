@@ -1,10 +1,9 @@
-import { lightColors } from '@theme/index';
 import { StyleSheet } from 'react-native';
 
-export const styles = StyleSheet.create({
+export const createAuthSwitchStyles = (theme: any) => StyleSheet.create({
   container: {
     flexDirection: 'row',
-    backgroundColor: '#F1F1F1',
+    backgroundColor: theme.colors.surfaceSecondary,
     borderRadius: 14,
     padding: 4,
   },
@@ -18,11 +17,10 @@ export const styles = StyleSheet.create({
   },
 
   active: {
-    backgroundColor: lightColors.primary
+    backgroundColor: theme.colors.primary,
   },
 
-
   activeText: {
-    color: '#FFF',
+    color: theme.colors.primaryText,
   },
 });

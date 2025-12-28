@@ -2,13 +2,12 @@ import { StyleSheet } from 'react-native';
 import { height, width } from '@utils/dimensios';
 import { typography } from '@theme/config/typography';
 import { spacing } from '@theme/config/spacing';
-import { lightColors } from '@theme/colors/colors';
 
-export const onboardingStyles = StyleSheet.create({
+export const createOnboardingStyles = (theme: any) => StyleSheet.create({
   // Main container styles
   container: {
     flex: 1,
-    backgroundColor: lightColors.background,
+    backgroundColor: theme.colors.background,
   },
 
   onboardingContainer: {
@@ -22,7 +21,7 @@ export const onboardingStyles = StyleSheet.create({
   // Page content styles
   pageContainer: {
     flex: 1,
-    backgroundColor: lightColors.background,
+    backgroundColor: theme.colors.background,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -43,7 +42,7 @@ export const onboardingStyles = StyleSheet.create({
 
   title: {
     ...typography.titles.xl,
-    color: lightColors.text,
+    color: theme.colors.text,
     marginBottom: spacing.md,
     textAlign: 'center',
     paddingHorizontal: spacing.lg,
@@ -51,7 +50,7 @@ export const onboardingStyles = StyleSheet.create({
 
   subtitle: {
     ...typography.body.md,
-    color: lightColors.text,
+    color: theme.colors.text,
     opacity: 0.7,
     textAlign: 'center',
     paddingHorizontal: spacing.xl,

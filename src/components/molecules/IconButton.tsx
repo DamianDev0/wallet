@@ -17,7 +17,7 @@ export const IconButton = ({
   style,
   ...props
 }: IconButtonProps) => {
-  const { theme, isDark } = useTheme();
+  const { theme } = useTheme();
 
   const sizeStyles = {
     sm: { width: 32, height: 32 },
@@ -30,7 +30,7 @@ export const IconButton = ({
       backgroundColor: theme.colors.primary,
     },
     secondary: {
-      backgroundColor: isDark ? '#1C1C1E' : '#F2F2F7',
+      backgroundColor: theme.colors.surface,
     },
     ghost: {
       backgroundColor: 'transparent',

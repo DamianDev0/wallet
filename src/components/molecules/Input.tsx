@@ -26,7 +26,7 @@ export const Input = ({
   style,
   ...props
 }: InputProps) => {
-  const { theme, isDark } = useTheme();
+  const { theme } = useTheme();
   const [isFocused, setIsFocused] = useState(false);
 
   let borderColor = 'transparent';
@@ -47,7 +47,7 @@ export const Input = ({
         style={[
           styles.inputContainer,
           {
-            backgroundColor: isDark ? '#1C1C1E' : '#F2F2F7',
+            backgroundColor: theme.colors.surface,
             borderColor: borderColor,
           },
         ]}>
@@ -64,7 +64,7 @@ export const Input = ({
             rightIcon ? styles.inputWithRightIcon : undefined,
             style,
           ]}
-          placeholderTextColor={isDark ? '#8E8E93' : '#A3A3A3'}
+          placeholderTextColor={theme.colors.textSecondary}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
           {...props}

@@ -6,6 +6,7 @@ import { Text } from "../atoms/Text"
 import { Icon, IconName } from "@components/atoms/Icon"
 import { width } from "@utils/dimensios"
 import { ProgressBar } from "@components/atoms/ProgressBar"
+import { useTheme } from "@contexts/ThemeContext"
 
 
 export type ToastType = "success" | "error" | "warning" | "info" | "loading" | "default"
@@ -56,6 +57,7 @@ export const Toast = ({
   customBorderColor,
   customTextColor,
 }: ToastConfig) => {
+  const { theme } = useTheme()
   const translateX = useRef(new Animated.Value(0)).current
   const opacity = useRef(new Animated.Value(1)).current
 
@@ -96,45 +98,45 @@ export const Toast = ({
     const configs = {
       success: {
         icon: "check" as IconName,
-        iconColor: "#10B981",
-        backgroundColor: "#1E3A32",
-        borderColor: "#2D5245",
-        glowColor: "#10B981",
+        iconColor: theme.colors.toastSuccess,
+        backgroundColor: theme.colors.toastSuccessBg,
+        borderColor: theme.colors.toastSuccessBorder,
+        glowColor: theme.colors.toastSuccess,
       },
       error: {
         icon: "error" as IconName,
-        iconColor: "#EF4444",
-        backgroundColor: "#3A1E1E",
-        borderColor: "#52262D",
-        glowColor: "#EF4444",
+        iconColor: theme.colors.toastError,
+        backgroundColor: theme.colors.toastErrorBg,
+        borderColor: theme.colors.toastErrorBorder,
+        glowColor: theme.colors.toastError,
       },
       warning: {
         icon: "warning" as IconName,
-        iconColor: "#F59E0B",
-        backgroundColor: "#3A2E1E",
-        borderColor: "#524529",
-        glowColor: "#F59E0B",
+        iconColor: theme.colors.toastWarning,
+        backgroundColor: theme.colors.toastWarningBg,
+        borderColor: theme.colors.toastWarningBorder,
+        glowColor: theme.colors.toastWarning,
       },
       info: {
         icon: "info" as IconName,
-        iconColor: "#3B82F6",
-        backgroundColor: "#1E2A3A",
-        borderColor: "#2D3F52",
-        glowColor: "#3B82F6",
+        iconColor: theme.colors.toastInfo,
+        backgroundColor: theme.colors.toastInfoBg,
+        borderColor: theme.colors.toastInfoBorder,
+        glowColor: theme.colors.toastInfo,
       },
       loading: {
         icon: "download" as IconName,
-        iconColor: "#8B5CF6",
-        backgroundColor: "#2E1E3A",
-        borderColor: "#3F2952",
-        glowColor: "#8B5CF6",
+        iconColor: theme.colors.toastLoading,
+        backgroundColor: theme.colors.surfaceSecondary,
+        borderColor: theme.colors.border,
+        glowColor: theme.colors.toastLoading,
       },
       default: {
         icon: "info" as IconName,
-        iconColor: "#64748B",
-        backgroundColor: "#1E293B",
-        borderColor: "#334155",
-        glowColor: "#64748B",
+        iconColor: theme.colors.toastDefault,
+        backgroundColor: theme.colors.surface,
+        borderColor: theme.colors.border,
+        glowColor: theme.colors.toastDefault,
       },
     }
 
@@ -146,7 +148,7 @@ export const Toast = ({
   const finalIconColor = iconColor || config.iconColor
   const finalBackgroundColor = customBackgroundColor || config.backgroundColor
   const finalBorderColor = customBorderColor || config.borderColor
-  const finalTextColor = customTextColor || "#FFFFFF"
+  const finalTextColor = customTextColor || theme.colors.text
   const messageText = message || description
 
   return (
@@ -190,7 +192,7 @@ export const Toast = ({
                 {title}
               </Text>
               {messageText && (
-                <Text variant="body-sm" weight="regular" color="#94A3B8" style={styles.message}>
+                <Text variant="body-sm" weight="regular" color={theme.colors.toastTextSecondary} style={styles.message}>
                   {messageText}
                 </Text>
               )}
@@ -198,7 +200,7 @@ export const Toast = ({
 
             {dismissible && onClose && (
               <Pressable onPress={onClose} style={styles.closeButton} hitSlop={8}>
-                <Icon name="close" size={18} color="#64748B" />
+                <Icon name="close" size={18} color={theme.colors.toastTextSecondary} />
               </Pressable>
             )}
           </View>
@@ -206,7 +208,7 @@ export const Toast = ({
           {type === "loading" && progress !== undefined && (
             <View style={styles.progressContainer}>
               <ProgressBar progress={progress} color={finalIconColor} />
-              <Text variant="body-sm" weight="medium" color="#94A3B8" style={styles.progressText}>
+              <Text variant="body-sm" weight="medium" color={theme.colors.toastTextSecondary} style={styles.progressText}>
                 {progress}%
               </Text>
             </View>
@@ -216,7 +218,7 @@ export const Toast = ({
             <View style={styles.actions}>
               {secondaryAction && (
                 <Pressable onPress={secondaryAction.onPress} style={[styles.actionButton, styles.secondaryButton]}>
-                  <Text variant="body-sm" weight="medium" color="#94A3B8">
+                  <Text variant="body-sm" weight="medium" color={theme.colors.toastTextSecondary}>
                     {secondaryAction.label}
                   </Text>
                 </Pressable>

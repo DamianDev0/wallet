@@ -2,11 +2,14 @@ import React, { useState } from 'react';
 import { View, Pressable } from 'react-native';
 
 import useNavigationHook from '@hooks/use-navigation';
-import { styles } from '../styles/auth-switch.styles';
+import { createAuthSwitchStyles } from '../styles/auth-switch.styles';
 import { Text } from '@components/index';
+import { useTheme } from '@contexts/ThemeContext';
 
 const AuthSwitch = () => {
   const navigation = useNavigationHook();
+  const { theme } = useTheme();
+  const styles = createAuthSwitchStyles(theme);
   const [active, setActive] = useState<'login' | 'signup'>('login');
 
   const onLogin = () => {

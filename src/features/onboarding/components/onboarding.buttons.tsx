@@ -3,15 +3,18 @@ import { View } from 'react-native';
 import { Check, ChevronRight, X } from 'lucide-react-native';
 import { Button } from '@components/molecules/Button';
 import { useTheme } from '@contexts/ThemeContext';
-import { onboardingStyles } from '../styles/onboarding.styles';
+import { createOnboardingStyles } from '../styles/onboarding.styles';
 
 export const DoneButton = (props: any) => {
+  const { theme } = useTheme();
+  const onboardingStyles = createOnboardingStyles(theme);
+
   return (
     <View style={onboardingStyles.doneButtonContainer}>
       <Button
         title="Done"
         variant="primary"
-        icon={<Check size={20} color="#FFFFFF" />}
+        icon={<Check size={20} color={theme.colors.primaryText} />}
         style={onboardingStyles.doneButton}
         {...props}
       />

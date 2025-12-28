@@ -71,8 +71,8 @@ export const Button = ({
   };
 
   const textColors = {
-    primary: '#FFFFFF',
-    secondary: '#FFFFFF',
+    primary: theme.colors.primaryText,
+    secondary: theme.colors.secondaryText,
     outline: theme.colors.primary,
     ghost: theme.colors.primary,
   };

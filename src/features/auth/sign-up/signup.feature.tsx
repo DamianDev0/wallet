@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, ScrollView } from 'react-native';
 import { Container, Text, Input, Button, Link } from '@components/index';
+import { ScreenHeader } from '@components/organisms';
 import useNavigationHook from '@hooks/use-navigation';
 import { signupStyles } from './styles/signup.styles';
 
@@ -13,6 +14,7 @@ const SignUpFeature = () => {
 
   return (
     <Container>
+      <ScreenHeader />
       <ScrollView
         style={signupStyles.scrollView}
         contentContainerStyle={signupStyles.scrollContent}

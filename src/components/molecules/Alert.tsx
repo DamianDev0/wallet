@@ -18,26 +18,26 @@ export const Alert = ({
   style,
   ...props
 }: AlertProps) => {
-  const { theme, isDark } = useTheme();
+  const { theme } = useTheme();
 
   const typeColors = {
     info: {
-      background: isDark ? '#0A84FF20' : '#0A84FF15',
-      border: theme.colors.primary,
-      text: theme.colors.primary,
+      background: theme.colors.infoBackground,
+      border: theme.colors.info,
+      text: theme.colors.info,
     },
     success: {
-      background: isDark ? '#34C75920' : '#34C75915',
+      background: theme.colors.successBackground,
       border: theme.colors.success,
       text: theme.colors.success,
     },
     warning: {
-      background: isDark ? '#FF9F0A20' : '#FF9F0A15',
+      background: theme.colors.warningBackground,
       border: theme.colors.secondary,
       text: theme.colors.secondary,
     },
     danger: {
-      background: isDark ? '#FF3B3020' : '#FF3B3015',
+      background: theme.colors.dangerBackground,
       border: theme.colors.danger,
       text: theme.colors.danger,
     },

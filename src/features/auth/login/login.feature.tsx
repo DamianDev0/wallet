@@ -1,6 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import { Container, Text, Input, Button, Link } from '@components/index';
+import { ScreenHeader } from '@components/organisms';
 import useNavigationHook from '@hooks/use-navigation';
 import { loginStyles } from './styles/login.styles';
 
@@ -18,6 +19,7 @@ const LoginFeature = () => {
 
   return (
     <Container>
+      <ScreenHeader />
       <View style={loginStyles.container}>
         <View style={loginStyles.content}>
           <View style={loginStyles.header}>

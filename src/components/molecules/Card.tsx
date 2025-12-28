@@ -26,7 +26,7 @@ export const Card = ({
   const cardStyle = {
     padding: paddingValue,
     borderRadius: borderRadiusValue,
-    backgroundColor: isDark ? '#1C1C1E' : '#FFFFFF',
+    backgroundColor: theme.colors.background,
     ...(elevated && {
       shadowColor: '#000',
       shadowOffset: { width: 0, height: 2 },

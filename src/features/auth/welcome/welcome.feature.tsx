@@ -1,12 +1,14 @@
 import React from 'react';
 import { View, Image } from 'react-native';
 import { Container, Text } from '@components/index';
+import { ScreenHeader } from '@components/organisms';
 import { welcomeStyles } from './styles/welcome.styles';
 import AuthSwitch from './components/AuthSwitch';
 
 const WelcomeFeature = () => {
   return (
     <Container>
+      <ScreenHeader />
       <View style={welcomeStyles.container}>
         <View style={welcomeStyles.welcomeTextContainer}>
           <Text variant="title-xxl">
