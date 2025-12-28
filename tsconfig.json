@@ -10,10 +10,11 @@
       "@hooks/*": ["src/hooks/*"],
       "@utils/*": ["src/utils/*"],
       "@theme/*": ["src/themes/*"],
-      "@types/*": ["src/types/*"],
+      "@type/*": ["src/types/*"],
       "@features/*": ["src/features/*"],
       "@interfaces/*": ["src/interfaces/*"],
-      "@contexts/*": ["src/contexts/*"]
+      "@contexts/*": ["src/contexts/*"],
+      "@core/*": ["src/core/*"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx"],

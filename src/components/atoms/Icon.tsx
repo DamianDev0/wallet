@@ -9,6 +9,7 @@ import {
   Bell,
   Mail,
   Clock,
+  ChevronDown,
 } from "lucide-react-native"
 
 export type IconName =
@@ -22,6 +23,7 @@ export type IconName =
   | "bell"
   | "mail"
   | "clock"
+  | "chevron-down"
 
 interface IconProps {
   name: IconName
@@ -52,6 +54,8 @@ export const Icon = ({ name, size = 24, color = "#FFFFFF" }: IconProps) => {
         return <Mail size={size} color={color} />
       case "clock":
         return <Clock size={size} color={color} />
+      case "chevron-down":
+        return <ChevronDown size={size} color={color} />
       default:
         return null
     }
