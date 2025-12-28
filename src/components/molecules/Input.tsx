@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   TextInput,
   TextInputProps,
@@ -7,8 +7,17 @@ import {
   Pressable,
   DimensionValue,
 } from 'react-native';
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withSpring,
+  withTiming,
+  withSequence,
+} from 'react-native-reanimated';
 import { useTheme } from '../../contexts/ThemeContext';
 import { Text } from '../atoms/Text';
+
+const AnimatedView = Animated.createAnimatedComponent(View);
 
 interface InputProps extends TextInputProps {
   label?: string;
@@ -36,12 +45,53 @@ export const Input = ({
   const { theme } = useTheme();
   const [isFocused, setIsFocused] = useState(false);
 
+  const scale = useSharedValue(1);
+  const borderWidth = useSharedValue(1);
+  const shake = useSharedValue(0);
+
   let borderColor = 'transparent';
   if (error) {
     borderColor = theme.colors.danger;
   } else if (isFocused) {
     borderColor = theme.colors.primary;
   }
+
+  useEffect(() => {
+    if (error) {
+      shake.value = withSequence(
+        withTiming(-5, { duration: 50 }),
+        withTiming(5, { duration: 50 }),
+        withTiming(-5, { duration: 50 }),
+        withTiming(5, { duration: 50 }),
+        withTiming(0, { duration: 50 })
+      );
+    }
+  }, [error]);
+
+  const handleFocus = () => {
+    setIsFocused(true);
+    scale.value = withSpring(1.02, {
+      damping: 15,
+      stiffness: 150,
+    });
+    borderWidth.value = withTiming(2, { duration: 200 });
+  };
+
+  const handleBlur = () => {
+    setIsFocused(false);
+    scale.value = withSpring(1, {
+      damping: 15,
+      stiffness: 150,
+    });
+    borderWidth.value = withTiming(1, { duration: 200 });
+  };
+
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ scale: scale.value }, { translateX: shake.value }],
+      borderWidth: borderWidth.value,
+    };
+  });
 
   return (
     <View style={[styles.container, { width }]}>
@@ -50,7 +100,7 @@ export const Input = ({
           {label}
         </Text>
       )}
-      <View
+      <AnimatedView
         style={[
           styles.inputContainer,
           {
@@ -58,6 +108,7 @@ export const Input = ({
             borderColor: borderColor,
             height,
           },
+          animatedStyle,
         ]}>
         {leftIcon && <View style={styles.leftIcon}>{leftIcon}</View>}
         <TextInput
@@ -73,8 +124,8 @@ export const Input = ({
             style,
           ]}
           placeholderTextColor={theme.colors.textSecondary}
-          onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
           {...props}
         />
         {rightIcon && (
@@ -85,7 +136,7 @@ export const Input = ({
             {rightIcon}
           </Pressable>
         )}
-      </View>
+      </AnimatedView>
       {error && (
         <Text variant="caption" style={{ color: theme.colors.danger }}>
           {error}

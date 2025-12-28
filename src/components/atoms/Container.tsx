@@ -1,6 +1,6 @@
+import { useTheme } from '@contexts/ThemeContext';
 import React from 'react';
 import { View, ViewProps, StyleSheet } from 'react-native';
-import { useTheme } from '../../contexts/ThemeContext';
 
 interface ContainerProps extends ViewProps {
   padding?: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl';

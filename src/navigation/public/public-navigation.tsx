@@ -12,10 +12,26 @@ export const PublicNavigation = () => {
   return (
     <Stack.Navigator
       initialRouteName="Onboarding"
-      screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Onboarding" component={Onboarding} />
-      <Stack.Screen name="Welcome" component={Welcome} />
-      <Stack.Screen name="SignUp" component={SignUp} />
+      screenOptions={{
+        headerShown: false,
+        animation: 'slide_from_right',
+        animationDuration: 300,
+      }}>
+      <Stack.Screen
+        name="Onboarding"
+        component={Onboarding}
+        options={{
+          animation: 'fade',
+        }}
+      />
+      <Stack.Screen
+        name="Welcome"
+        component={Welcome}
+        options={{
+          animation: 'slide_from_bottom',
+        }}
+      />
+      <Stack.Screen name="SignUp" component={SignUp}  />
       <Stack.Screen name="Login" component={Login} />
     </Stack.Navigator>
   );

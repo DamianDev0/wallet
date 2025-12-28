@@ -5,11 +5,18 @@ import {
   StyleSheet,
   ActivityIndicator,
   View,
-  ViewStyle,
 } from 'react-native';
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withSpring,
+  withTiming,
+} from 'react-native-reanimated';
 import { useTheme } from '../../contexts/ThemeContext';
 import { Text } from '../atoms/Text';
 import { TextWeight } from '@type/text.types';
+
+const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 
 interface ButtonProps extends Omit<PressableProps, 'children'> {
@@ -35,6 +42,8 @@ export const Button = ({
   ...props
 }: ButtonProps) => {
   const { theme } = useTheme();
+  const scale = useSharedValue(1);
+  const opacity = useSharedValue(1);
 
   const sizeStyles = {
     sm: {
@@ -83,24 +92,50 @@ export const Button = ({
 
   const isDisabled = disabled || loading;
 
-  return (
-    <Pressable
-      style={({ pressed }) => {
-        const baseStyle = [
-          styles.button,
-          {
-            height: sizeStyles[size].height,
-            paddingHorizontal: sizeStyles[size].paddingHorizontal,
-          },
-          variantStyles[variant],
-          fullWidth && styles.fullWidth,
-          isDisabled && styles.disabled,
-          pressed && !isDisabled && styles.pressed,
-        ].filter(Boolean) as ViewStyle[];
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ scale: scale.value }],
+      opacity: opacity.value,
+    };
+  });
 
-        return [baseStyle, style] as any;
-      }}
+  const handlePressIn = () => {
+    if (!isDisabled) {
+      scale.value = withSpring(0.95, {
+        damping: 15,
+        stiffness: 150,
+      });
+      opacity.value = withTiming(0.8, { duration: 100 });
+    }
+  };
+
+  const handlePressOut = () => {
+    if (!isDisabled) {
+      scale.value = withSpring(1, {
+        damping: 15,
+        stiffness: 150,
+      });
+      opacity.value = withTiming(1, { duration: 100 });
+    }
+  };
+
+  return (
+    <AnimatedPressable
+      style={[
+        styles.button,
+        {
+          height: sizeStyles[size].height,
+          paddingHorizontal: sizeStyles[size].paddingHorizontal,
+        },
+        variantStyles[variant],
+        fullWidth && styles.fullWidth,
+        isDisabled && styles.disabled,
+        animatedStyle,
+        style,
+      ]}
       disabled={isDisabled}
+      onPressIn={handlePressIn}
+      onPressOut={handlePressOut}
       {...props}
     >
       {loading ? (
@@ -118,7 +153,7 @@ export const Button = ({
           </Text>
         </View>
       )}
-    </Pressable>
+    </AnimatedPressable>
   );
 };
 
@@ -145,8 +180,5 @@ const styles = StyleSheet.create({
   },
   disabled: {
     opacity: 0.5,
-  },
-  pressed: {
-    opacity: 0.8,
   },
 });
