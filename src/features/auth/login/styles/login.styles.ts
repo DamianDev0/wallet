@@ -52,10 +52,11 @@ export const loginStyles = StyleSheet.create({
   },
   signUpTextContainer: {
     alignItems: 'center',
-    marginTop: height * 0.01,
+    marginTop: height * 0.09,
   },
   signUpText: {
     textAlign: 'center',
+    marginBottom: height * 0.03,
   },
   footer: {
     paddingBottom: 0,

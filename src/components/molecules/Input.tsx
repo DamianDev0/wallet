@@ -138,7 +138,7 @@ export const Input = ({
         )}
       </AnimatedView>
       {error && (
-        <Text variant="caption" style={{ color: theme.colors.danger }}>
+        <Text variant="caption" style={[styles.errorText, { color: theme.colors.danger }]}>
           {error}
         </Text>
       )}
@@ -147,7 +147,9 @@ export const Input = ({
 };
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    position: 'relative',
+  },
   label: {
     marginBottom: 8,
   },
@@ -172,5 +174,10 @@ const styles = StyleSheet.create({
   },
   rightIcon: {
     marginLeft: 4,
+  },
+  errorText: {
+    position: 'absolute',
+    bottom: -18,
+    left: 0,
   },
 });
