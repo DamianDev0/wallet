@@ -1,6 +1,6 @@
-import { StyleSheet, Dimensions } from 'react-native';
+import { height, width } from '@utils/dimensios';
+import { StyleSheet } from 'react-native';
 
-const { width, height } = Dimensions.get('window');
 
 export const loginStyles = StyleSheet.create({
   container: {
