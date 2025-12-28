@@ -9,3 +9,4 @@ export { Card } from './molecules/Card';
 export { Input } from './molecules/Input';
 export { IconButton } from './molecules/IconButton';
 export { Alert } from './molecules/Alert';
+export { GoogleButton } from './molecules/GoogleButton';

@@ -5,6 +5,7 @@ import {
   View,
   StyleSheet,
   Pressable,
+  DimensionValue,
 } from 'react-native';
 import { useTheme } from '../../contexts/ThemeContext';
 import { Text } from '../atoms/Text';
@@ -15,6 +16,9 @@ interface InputProps extends TextInputProps {
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
   onRightIconPress?: () => void;
+  width?: DimensionValue;
+  height?: number;
+  placeholderSize?: number;
 }
 
 export const Input = ({
@@ -24,6 +28,9 @@ export const Input = ({
   rightIcon,
   onRightIconPress,
   style,
+  width = '100%',
+  height = 48,
+  placeholderSize,
   ...props
 }: InputProps) => {
   const { theme } = useTheme();
@@ -37,7 +44,7 @@ export const Input = ({
   }
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { width }]}>
       {label && (
         <Text variant="caption" weight="medium" style={styles.label}>
           {label}
@@ -49,6 +56,7 @@ export const Input = ({
           {
             backgroundColor: theme.colors.surface,
             borderColor: borderColor,
+            height,
           },
         ]}>
         {leftIcon && <View style={styles.leftIcon}>{leftIcon}</View>}
@@ -58,7 +66,7 @@ export const Input = ({
             {
               color: theme.colors.text,
               fontFamily: theme.typography.families.poppins.regular,
-              fontSize: theme.typography.sizes.base,
+              fontSize: placeholderSize || theme.typography.sizes.base,
             },
             leftIcon ? styles.inputWithLeftIcon : undefined,
             rightIcon ? styles.inputWithRightIcon : undefined,
@@ -88,9 +96,7 @@ export const Input = ({
 };
 
 const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-  },
+  container: {},
   label: {
     marginBottom: 8,
   },
@@ -99,7 +105,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 12,
     borderWidth: 1,
-    height: 48,
     paddingHorizontal: 16,
   },
   input: {

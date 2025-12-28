@@ -1,76 +1,82 @@
-import React from 'react';
-import { View } from 'react-native';
-import { Container, Text, Input, Button, Link } from '@components/index';
-import { ScreenHeader } from '@components/organisms';
-import useNavigationHook from '@hooks/use-navigation';
-import { loginStyles } from './styles/login.styles';
+  import React from 'react';
+  import { View, Image } from 'react-native';
+  import { Container, Text, Input, Button, Link, GoogleButton } from '@components/index';
+  import { ScreenHeader } from '@components/organisms';
+  import useNavigationHook from '@hooks/use-navigation';
+  import { loginStyles } from './styles/login.styles';
 
-const LoginFeature = () => {
-  const navigation = useNavigationHook();
+  const LoginFeature = () => {
+    const navigation = useNavigationHook();
 
-  const handleSignUp = () => {
-    navigation.navigate('SignUp');
-  };
+    const handleSignUp = () => {
+      navigation.navigate('SignUp');
+    };
 
-  const handleForgotPassword = () => {
-    // TODO: Implement forgot password
-    console.log('Forgot password');
-  };
-
-  return (
-    <Container>
-      <ScreenHeader />
-      <View style={loginStyles.container}>
-        <View style={loginStyles.content}>
-          <View style={loginStyles.header}>
-            <Text variant="title-lg" weight="semiBold" style={loginStyles.title}>
-              Hey, Welcome Back
+    return (
+      <Container>
+        <ScreenHeader />
+        <View style={loginStyles.container}>
+          <View style={loginStyles.welcomeTextContainer}>
+            <Text variant="title-xxl">
+              Hey{'\n'}Welcome{'\n'}Back!
             </Text>
           </View>
 
-          <View style={loginStyles.form}>
-            <Input
-              placeholder="Email Id"
-              keyboardType="email-address"
-              autoCapitalize="none"
-            />
-            <Input placeholder="Password" secureTextEntry />
+          <View style={loginStyles.content}>
+            <View style={loginStyles.imageContainer}>
+              <Image
+                source={{
+                  uri: 'https://res.cloudinary.com/dpqbn1gqb/image/upload/v1766859935/Saly-35_tesw8e.png',
+                }}
+                style={loginStyles.image}
+                resizeMode="contain"
+              />
+            </View>
 
-            <Link
-              onPress={handleForgotPassword}
-              style={loginStyles.forgotPassword}>
-              Forgot password?
-            </Link>
+            <View style={loginStyles.formContainer}>
+              <View style={loginStyles.form}>
+                <Input
+                  placeholder="Email"
+                  keyboardType="email-address"
+                  autoCapitalize="none"
+                  height={48}
+                />
+                <Input
+                  placeholder="Password"
+                  secureTextEntry
+                  height={48}
+                />
 
-            <Button title="Login" variant="primary" fullWidth size="lg" />
+                <Button title="Login" variant="primary" fullWidth size="lg" />
 
-            <Text variant="body-md" style={loginStyles.divider}>
-              or continue with
-            </Text>
+                <View style={loginStyles.dividerContainer}>
+                  <View style={loginStyles.dividerLine} />
+                  <Text variant="body-sm" style={loginStyles.dividerText}>
+                    or continue with
+                  </Text>
+                  <View style={loginStyles.dividerLine} />
+                </View>
 
-            <Button
-              title="Google"
-              variant="outline"
-              fullWidth
-              size="lg"
-              icon={
-                <Text variant="body-md" style={loginStyles.googleIcon}>
-                  G
-                </Text>
-              }
-            />
+                <GoogleButton
+                  title="Login with Google"
+                  size="lg"
+                  textWeight="medium"
+                />
+
+                <View style={loginStyles.signUpTextContainer}>
+                  <Text variant="body-md" style={loginStyles.signUpText}>
+                    Don't have an account?{' '}
+                    <Link onPress={handleSignUp}>Sign Up</Link>
+                  </Text>
+                </View>
+              </View>
+            </View>
           </View>
-        </View>
 
-        <View style={loginStyles.footer}>
-          <Text variant="body-md" style={loginStyles.footerText}>
-            Don't have an account?{' '}
-            <Link onPress={handleSignUp}>Sign up</Link>
-          </Text>
+          <View style={loginStyles.footer}></View>
         </View>
-      </View>
-    </Container>
-  );
-};
+      </Container>
+    );
+  };
 
-export default LoginFeature;
+  export default LoginFeature;

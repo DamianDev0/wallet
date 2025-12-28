@@ -10,6 +10,15 @@ import {
 import { useTheme } from '../../contexts/ThemeContext';
 import { Text } from '../atoms/Text';
 
+type TextWeight =
+  | 'thin'
+  | 'regular'
+  | 'medium'
+  | 'semiBold'
+  | 'bold'
+  | 'extraBold'
+  | 'black';
+
 interface ButtonProps extends Omit<PressableProps, 'children'> {
   title: string;
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
@@ -17,6 +26,7 @@ interface ButtonProps extends Omit<PressableProps, 'children'> {
   loading?: boolean;
   fullWidth?: boolean;
   icon?: React.ReactNode;
+  textWeight?: TextWeight;
 }
 
 export const Button = ({
@@ -27,6 +37,7 @@ export const Button = ({
   fullWidth = false,
   icon,
   disabled,
+  textWeight = 'semiBold',
   style,
   ...props
 }: ButtonProps) => {
@@ -93,10 +104,12 @@ export const Button = ({
           isDisabled && styles.disabled,
           pressed && !isDisabled && styles.pressed,
         ].filter(Boolean) as ViewStyle[];
+
         return [baseStyle, style] as any;
       }}
       disabled={isDisabled}
-      {...props}>
+      {...props}
+    >
       {loading ? (
         <ActivityIndicator color={textColors[variant]} />
       ) : (
@@ -104,9 +117,10 @@ export const Button = ({
           {icon && <View style={styles.icon}>{icon}</View>}
           <Text
             variant={sizeStyles[size].textVariant}
-            weight="semiBold"
+            weight={textWeight}
             color={textColors[variant]}
-            style={styles.text}>
+            style={styles.text}
+          >
             {title}
           </Text>
         </View>
