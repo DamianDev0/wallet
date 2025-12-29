@@ -30,7 +30,7 @@ export const Switch = ({ label, value, onChange, error, disabled }: SwitchProps)
             false: theme.colors.border,
             true: theme.colors.primary,
           }}
-          thumbColor={Platform.OS === 'android' ? theme.colors.white : undefined}
+          thumbColor={Platform.OS === 'android' ? theme.colors.primary : undefined}
           ios_backgroundColor={theme.colors.border}
         />
       </View>

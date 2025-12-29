@@ -15,7 +15,6 @@ const QUERY_KEYS = {
   },
 } as const;
 
-// Hook para login
 export const useLogin = () => {
   const queryClient = useQueryClient();
   const { setAuth } = useAuthStore();
@@ -23,16 +22,16 @@ export const useLogin = () => {
   return useMutation({
     mutationFn: (credentials: LoginRequest) => authController.login(credentials),
     onSuccess: (data) => {
-      // Verificar si es un error
+  
       if ('statusCode' in data && data.statusCode >= 400) {
         return;
       }
 
-      // Guardar usuario en cache de TanStack Query
+
       if ('data' in data) {
         queryClient.setQueryData(QUERY_KEYS.AUTH.ME, data.data.accessToken);
 
-        // Guardar token y usuario en Zustand store
+        // save token in zustant store
         setAuth(data.data.accessToken);
       }
     },
@@ -55,7 +54,6 @@ export const useSignUp = () => {
         return;
       }
 
-      // Verificar que sea un User válido
       if ('id' in data && 'email' in data) {
         // Guardar usuario en cache de TanStack Query
         queryClient.setQueryData(QUERY_KEYS.AUTH.ME, data);
@@ -70,7 +68,6 @@ export const useSignUp = () => {
   });
 };
 
-// Hook para logout
 export const useLogout = () => {
   const queryClient = useQueryClient();
   const { clearAuth } = useAuthStore();
@@ -78,10 +75,9 @@ export const useLogout = () => {
   return useMutation({
     mutationFn: () => authController.logout(),
     onSuccess: () => {
-      // Limpiar cache de TanStack Query
       queryClient.clear();
 
-      // Limpiar Zustand store
+ 
       clearAuth();
     },
     onError: (error: ErrorResponse) => {
@@ -90,7 +86,7 @@ export const useLogout = () => {
   });
 };
 
-// Hook para obtener el usuario actual
+
 export const useCurrentUser = (enabled: boolean = true) => {
   const { setUser } = useAuthStore();
 
@@ -99,25 +95,22 @@ export const useCurrentUser = (enabled: boolean = true) => {
     queryFn: async () => {
       const result = await authController.getCurrentUser();
 
-      // Si es un error, lanzarlo
       if ('statusCode' in result && result.statusCode >= 400) {
         throw result;
       }
 
-      // Verificar que sea un User válido antes de guardar
+     
       if ('id' in result && 'email' in result) {
-        // Actualizar usuario en Zustand store
         setUser(result);
       }
 
       return result;
     },
     enabled,
-    staleTime: 1000 * 60 * 10, // 10 minutos
+    staleTime: 1000 * 60 * 10, 
   });
 };
 
-// Hook para verificar si está autenticado desde el store
 export const useIsAuthenticated = () => {
   const { isAuthenticated, user } = useAuthStore();
 

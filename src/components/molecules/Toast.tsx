@@ -1,7 +1,16 @@
 "use client"
 
-import { useRef } from "react"
-import { View, StyleSheet, Pressable, Animated, PanResponder } from "react-native"
+import { View, StyleSheet, Pressable } from "react-native"
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withTiming,
+  withSpring,
+  interpolate,
+  FadeIn,
+  FadeOut,
+} from "react-native-reanimated"
+import { Gesture, GestureDetector } from "react-native-gesture-handler"
 import { Text } from "../atoms/Text"
 import { Icon, IconName } from "@components/atoms/Icon"
 import { width } from "@utils/dimensios"
@@ -58,41 +67,53 @@ export const Toast = ({
   customTextColor,
 }: ToastConfig) => {
   const { theme } = useTheme()
-  const translateX = useRef(new Animated.Value(0)).current
-  const opacity = useRef(new Animated.Value(1)).current
+  const translateX = useSharedValue(0)
+  const opacity = useSharedValue(1)
 
-  const panResponder = useRef(
-    PanResponder.create({
-      onStartShouldSetPanResponder: () => swipeable,
-      onMoveShouldSetPanResponder: (_, gestureState) => swipeable && Math.abs(gestureState.dx) > 5,
-      onPanResponderMove: (_, gestureState) => {
-        translateX.setValue(gestureState.dx)
-      },
-      onPanResponderRelease: (_, gestureState) => {
-        if (Math.abs(gestureState.dx) > width * 0.3) {
-          Animated.parallel([
-            Animated.timing(translateX, {
-              toValue: gestureState.dx > 0 ? width : -width,
-              duration: 200,
-              useNativeDriver: true,
-            }),
-            Animated.timing(opacity, {
-              toValue: 0,
-              duration: 200,
-              useNativeDriver: true,
-            }),
-          ]).start(() => onClose?.())
-        } else {
-          Animated.spring(translateX, {
-            toValue: 0,
-            useNativeDriver: true,
-            tension: 50,
-            friction: 7,
-          }).start()
-        }
-      },
-    }),
-  ).current
+  const pan = Gesture.Pan()
+    .enabled(swipeable)
+    .onUpdate((event) => {
+      translateX.value = event.translationX
+      // Reducir opacidad mientras se arrastra
+      opacity.value = interpolate(
+        Math.abs(event.translationX),
+        [0, width * 0.5],
+        [1, 0.3],
+        "clamp"
+      )
+    })
+    .onEnd((event) => {
+      const shouldDismiss = Math.abs(event.translationX) > width * 0.3
+
+      if (shouldDismiss) {
+        translateX.value = withSpring(
+          event.translationX > 0 ? width : -width,
+          {
+            damping: 20,
+            stiffness: 90,
+          },
+          () => {
+            if (onClose) {
+              onClose()
+            }
+          }
+        )
+        opacity.value = withTiming(0, { duration: 300 })
+      } else {
+        translateX.value = withSpring(0, {
+          damping: 20,
+          stiffness: 90,
+        })
+        opacity.value = withTiming(1, { duration: 200 })
+      }
+    })
+
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ translateX: translateX.value }],
+      opacity: opacity.value,
+    }
+  })
 
   const getToastConfig = () => {
     const configs = {
@@ -152,92 +173,89 @@ export const Toast = ({
   const messageText = message || description
 
   return (
-    <Animated.View
-      style={[
-        styles.wrapper,
-        {
-          transform: [{ translateX }],
-          opacity,
-        },
-      ]}
-      {...(swipeable ? panResponder.panHandlers : {})}
-    >
-      <View
-        style={[
-          styles.container,
-          {
-            backgroundColor: finalBackgroundColor,
-            borderColor: finalBorderColor,
-          },
-          glowEffect && [
-            styles.glowEffect,
-            {
-              shadowColor: config.glowColor,
-            },
-          ],
-        ]}
+    <GestureDetector gesture={pan}>
+      <Animated.View
+        entering={FadeIn.duration(250)}
+        exiting={FadeOut.duration(250)}
+        style={[styles.wrapper, animatedStyle]}
       >
-        <View style={styles.content}>
-          <View style={styles.header}>
-            {finalIcon && (
-              <View style={styles.iconContainer}>
-                <View style={[styles.iconCircle, { backgroundColor: `${finalIconColor}20` }]}>
-                  <Icon name={finalIcon} size={16} color={finalIconColor} />
+        <View
+          style={[
+            styles.container,
+            {
+              backgroundColor: finalBackgroundColor,
+              borderColor: finalBorderColor,
+            },
+            glowEffect && [
+              styles.glowEffect,
+              {
+                shadowColor: config.glowColor,
+              },
+            ],
+          ]}
+        >
+          <View style={styles.content}>
+            <View style={styles.header}>
+              {finalIcon && (
+                <View style={styles.iconContainer}>
+                  <View style={[styles.iconCircle, { backgroundColor: `${finalIconColor}20` }]}>
+                    <Icon name={finalIcon} size={16} color={finalIconColor} />
+                  </View>
                 </View>
+              )}
+
+              <View style={styles.textContainer}>
+                <Text variant="body-sm" weight="semiBold" color={finalTextColor}>
+                  {title}
+                </Text>
+                {messageText && (
+                  <Text variant="body-xs" weight="regular" color={theme.colors.toastTextSecondary} style={styles.message}>
+                    {messageText}
+                  </Text>
+                )}
+              </View>
+
+              {dismissible && onClose && (
+                <Pressable onPress={onClose} style={styles.closeButton} hitSlop={8}>
+                  <Icon name="close" size={14} color={theme.colors.toastTextSecondary} />
+                </Pressable>
+              )}
+            </View>
+
+            {type === "loading" && progress !== undefined && (
+              <View style={styles.progressContainer}>
+                <ProgressBar progress={progress} color={finalIconColor} />
+                <Text variant="body-sm" weight="medium" color={theme.colors.toastTextSecondary} style={styles.progressText}>
+                  {progress}%
+                </Text>
               </View>
             )}
 
-            <View style={styles.textContainer}>
-              <Text variant="body-sm" weight="semiBold" color={finalTextColor}>
-                {title}
-              </Text>
-              {messageText && (
-                <Text variant="body-xs" weight="regular" color={theme.colors.toastTextSecondary} style={styles.message}>
-                  {messageText}
-                </Text>
-              )}
-            </View>
-
-            {dismissible && onClose && (
-              <Pressable onPress={onClose} style={styles.closeButton} hitSlop={8}>
-                <Icon name="close" size={14} color={theme.colors.toastTextSecondary} />
-              </Pressable>
+            {(primaryAction || secondaryAction) && (
+              <View style={styles.actions}>
+                {secondaryAction && (
+                  <Pressable onPress={secondaryAction.onPress} style={[styles.actionButton, styles.secondaryButton]}>
+                    <Text variant="body-sm" weight="medium" color={theme.colors.toastTextSecondary}>
+                      {secondaryAction.label}
+                    </Text>
+                  </Pressable>
+                )}
+                {primaryAction && (
+                  <Pressable
+                    onPress={primaryAction.onPress}
+                    style={[styles.actionButton, styles.primaryButton, { backgroundColor: `${finalIconColor}20` }]}
+                  >
+                    <Text variant="body-sm" weight="medium" color={finalIconColor}>
+                      {primaryAction.label}
+                    </Text>
+                  </Pressable>
+                )}
+              </View>
             )}
           </View>
-
-          {type === "loading" && progress !== undefined && (
-            <View style={styles.progressContainer}>
-              <ProgressBar progress={progress} color={finalIconColor} />
-              <Text variant="body-sm" weight="medium" color={theme.colors.toastTextSecondary} style={styles.progressText}>
-                {progress}%
-              </Text>
-            </View>
-          )}
-
-          {(primaryAction || secondaryAction) && (
-            <View style={styles.actions}>
-              {secondaryAction && (
-                <Pressable onPress={secondaryAction.onPress} style={[styles.actionButton, styles.secondaryButton]}>
-                  <Text variant="body-sm" weight="medium" color={theme.colors.toastTextSecondary}>
-                    {secondaryAction.label}
-                  </Text>
-                </Pressable>
-              )}
-              {primaryAction && (
-                <Pressable
-                  onPress={primaryAction.onPress}
-                  style={[styles.actionButton, styles.primaryButton, { backgroundColor: `${finalIconColor}20` }]}
-                >
-                  <Text variant="body-sm" weight="medium" color={finalIconColor}>
-                    {primaryAction.label}
-                  </Text>
-                </Pressable>
-              )}
-            </View>
-          )}
         </View>
-      </View>
-    </Animated.View>
+      </Animated.View>
+    </GestureDetector>
   )
 }
 
