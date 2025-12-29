@@ -18,7 +18,7 @@ const authService = {
 
   async signUp(data: SignUpRequest): Promise<User | ErrorResponse> {
     try {
-      const response = await apiUrl.post<{ data: User }>('/auth/register', data);
+      const response = await apiUrl.post<{ data: User }>('/auth/signup', data);
       return response.data.data;
     } catch (error) {
       throw handleApiError(error);

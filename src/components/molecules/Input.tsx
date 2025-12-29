@@ -74,7 +74,7 @@ export const Input = ({
       damping: 15,
       stiffness: 150,
     });
-    borderWidth.value = withTiming(2, { duration: 200 });
+    borderWidth.value = withTiming(1, { duration: 200 });
   };
 
   const handleBlur = () => {

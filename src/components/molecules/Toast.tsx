@@ -182,17 +182,17 @@ export const Toast = ({
             {finalIcon && (
               <View style={styles.iconContainer}>
                 <View style={[styles.iconCircle, { backgroundColor: `${finalIconColor}20` }]}>
-                  <Icon name={finalIcon} size={20} color={finalIconColor} />
+                  <Icon name={finalIcon} size={16} color={finalIconColor} />
                 </View>
               </View>
             )}
 
             <View style={styles.textContainer}>
-              <Text variant="body-lg" weight="semiBold" color={finalTextColor}>
+              <Text variant="body-sm" weight="semiBold" color={finalTextColor}>
                 {title}
               </Text>
               {messageText && (
-                <Text variant="body-sm" weight="regular" color={theme.colors.toastTextSecondary} style={styles.message}>
+                <Text variant="body-xs" weight="regular" color={theme.colors.toastTextSecondary} style={styles.message}>
                   {messageText}
                 </Text>
               )}
@@ -200,7 +200,7 @@ export const Toast = ({
 
             {dismissible && onClose && (
               <Pressable onPress={onClose} style={styles.closeButton} hitSlop={8}>
-                <Icon name="close" size={18} color={theme.colors.toastTextSecondary} />
+                <Icon name="close" size={14} color={theme.colors.toastTextSecondary} />
               </Pressable>
             )}
           </View>
@@ -244,9 +244,9 @@ export const Toast = ({
 const styles = StyleSheet.create({
   glowEffect: {
     shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.9,
-    shadowRadius: 25,
-    elevation: 15,
+    shadowOpacity: 0.3,
+    shadowRadius: 10,
+    elevation: 8,
   },
   wrapper: {
     width: "100%",
@@ -254,39 +254,39 @@ const styles = StyleSheet.create({
   },
   container: {
     width: "90%",
-    borderRadius: 12,
+    borderRadius: 10,
     borderWidth: 1,
-    padding: 12,
+    padding: 8,
   },
   content: {
-    gap: 10,
+    gap: 6,
   },
   header: {
     flexDirection: "row",
     alignItems: "center",
   },
   iconContainer: {
-    marginRight: 10,
+    marginRight: 8,
   },
   iconCircle: {
-    width: 36,
-    height: 36,
-    borderRadius: 18,
+    width: 28,
+    height: 28,
+    borderRadius: 14,
     justifyContent: "center",
     alignItems: "center",
   },
   textContainer: {
     flex: 1,
-    gap: 2,
+    gap: 1,
   },
   message: {
-    marginTop: 2,
+    marginTop: 1,
   },
   closeButton: {
-    padding: 4,
+    padding: 2,
   },
   progressContainer: {
-    gap: 6,
+    gap: 4,
   },
   progressText: {
     textAlign: "right",
@@ -294,13 +294,13 @@ const styles = StyleSheet.create({
   actions: {
     flexDirection: "row",
     justifyContent: "flex-end",
-    gap: 10,
+    gap: 8,
   },
   actionButton: {
-    paddingHorizontal: 14,
-    paddingVertical: 7,
-    borderRadius: 8,
-    minWidth: 70,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderRadius: 6,
+    minWidth: 60,
     alignItems: "center",
     justifyContent: "center",
   },

@@ -9,7 +9,7 @@ import {
 
 export const Config = {
   api: {
-    url: API_URL || 'http://localhost:3000/api',
+    url: API_URL || 'http://localhost:8080/wallet/v1',
     timeout: parseInt(API_TIMEOUT || '30000', 10),
   },
   app: {

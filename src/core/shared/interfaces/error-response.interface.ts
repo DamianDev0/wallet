@@ -1,5 +1,7 @@
 export interface ErrorResponse {
-  code: number;
+  statusCode: number;
   message: string;
-  errors?: Record<string, string[]>;
+  error?: Record<string, string[]>;
+  timestamp: string;
+  path: string;
 }

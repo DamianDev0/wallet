@@ -1,18 +1,14 @@
 import axios from 'axios';
 import { useAuthStore } from '@core/shared/store/auth.store';
-
-const API_BASE_URL = __DEV__
-  ? 'http://localhost:3000/api'
-  : 'https://api.yourapp.com';
+import { Config } from './env.config';
 
 const apiUrl = axios.create({
-  baseURL: API_BASE_URL,
-  timeout: 18000,
+  baseURL: Config.api.url,
+  timeout: Config.api.timeout,
 });
 
 apiUrl.interceptors.request.use(
   async (config) => {
-
     const token = useAuthStore.getState().getToken();
 
     if (token) {
@@ -31,7 +27,9 @@ apiUrl.interceptors.request.use(
 );
 
 apiUrl.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    return response;
+  },
   async (error) => {
     if (error.response?.status === 401) {
     }

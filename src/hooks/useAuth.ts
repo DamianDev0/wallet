@@ -24,16 +24,16 @@ export const useLogin = () => {
     mutationFn: (credentials: LoginRequest) => authController.login(credentials),
     onSuccess: (data) => {
       // Verificar si es un error
-      if ('code' in data && data.code >= 400) {
+      if ('statusCode' in data && data.statusCode >= 400) {
         return;
       }
 
       // Guardar usuario en cache de TanStack Query
       if ('data' in data) {
-        queryClient.setQueryData(QUERY_KEYS.AUTH.ME, data.data.user);
+        queryClient.setQueryData(QUERY_KEYS.AUTH.ME, data.data.accessToken);
 
         // Guardar token y usuario en Zustand store
-        setAuth(data.data.accessToken, data.data.user);
+        setAuth(data.data.accessToken);
       }
     },
     onError: (error: ErrorResponse) => {
@@ -51,7 +51,7 @@ export const useSignUp = () => {
     mutationFn: (credentials: SignUpRequest) => authController.signUp(credentials),
     onSuccess: (data) => {
       // Verificar si es un error
-      if ('code' in data && data.code >= 400) {
+      if ('statusCode' in data && data.statusCode >= 400) {
         return;
       }
 
@@ -100,7 +100,7 @@ export const useCurrentUser = (enabled: boolean = true) => {
       const result = await authController.getCurrentUser();
 
       // Si es un error, lanzarlo
-      if ('code' in result && result.code >= 400) {
+      if ('statusCode' in result && result.statusCode >= 400) {
         throw result;
       }
 
