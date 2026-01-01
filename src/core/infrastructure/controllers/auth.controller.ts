@@ -7,6 +7,7 @@ import {
 import { AuthRepositoryImp } from '../repositories/auth.repositoryImp';
 import { LoginRequest } from '@core/domain/entities/auth/request/login.request';
 import { SignUpRequest } from '@core/domain/entities/auth/request/signUp.request';
+import { SignUpResponse } from '@core/domain/entities/auth/response/signup.response';
 import { User } from '@core/domain/entities/user/user';
 import { ErrorResponse } from '@core/shared/interfaces/error-response.interface';
 import { LoginResponse } from '@core/domain/entities/auth/response/login.response';
@@ -19,7 +20,7 @@ export class AuthController {
     return response;
   }
 
-  async signUp(data: SignUpRequest): Promise<User | ErrorResponse> {
+  async signUp(data: SignUpRequest): Promise<SignUpResponse | ErrorResponse> {
     const response = await SignUpUseCase(authRepository, data);
     return response;
   }

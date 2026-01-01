@@ -16,3 +16,4 @@ export { Select } from './molecules/Select';
 
 // Organisms
 export { Form } from './organisms/Form';
+export { default as BelvoWidget } from './organisms/BelvoWidget';

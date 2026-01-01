@@ -1,6 +1,7 @@
 import { LoginRequest } from '@core/domain/entities/auth/request/login.request';
 import { SignUpRequest } from '@core/domain/entities/auth/request/signUp.request';
 import { LoginResponse } from '@core/domain/entities/auth/response/login.response';
+import { SignUpResponse } from '@core/domain/entities/auth/response/signup.response';
 import { User } from '@core/domain/entities/user/user';
 import { AuthRepository } from '@core/domain/repositories/auth.repository';
 import { ErrorResponse } from '@core/shared/interfaces/error-response.interface';
@@ -11,7 +12,7 @@ export class AuthRepositoryImp implements AuthRepository {
     return await authService.login(data);
   }
 
-  async signUp(data: SignUpRequest): Promise<User | ErrorResponse> {
+  async signUp(data: SignUpRequest): Promise<SignUpResponse | ErrorResponse> {
     return await authService.signUp(data);
   }
 

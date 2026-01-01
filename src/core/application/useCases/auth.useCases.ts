@@ -1,6 +1,7 @@
 import { LoginRequest } from '@core/domain/entities/auth/request/login.request';
 import { SignUpRequest } from '@core/domain/entities/auth/request/signUp.request';
 import { LoginResponse } from '@core/domain/entities/auth/response/login.response';
+import { SignUpResponse } from '@core/domain/entities/auth/response/signup.response';
 import { User } from '@core/domain/entities/user/user';
 import { AuthRepository } from '@core/domain/repositories/auth.repository';
 import { ErrorResponse } from '@core/shared/interfaces/error-response.interface';
@@ -15,7 +16,7 @@ export const LoginUseCase = (
 export const SignUpUseCase = (
   authRepository: AuthRepository,
   data: SignUpRequest
-): Promise<User | ErrorResponse> => {
+): Promise<SignUpResponse | ErrorResponse> => {
   return authRepository.signUp(data);
 };
 

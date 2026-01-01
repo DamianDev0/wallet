@@ -2,6 +2,7 @@ import apiUrl from '@core/config/api-url';
 import { LoginRequest } from '@core/domain/entities/auth/request/login.request';
 import { SignUpRequest } from '@core/domain/entities/auth/request/signUp.request';
 import { LoginResponse } from '@core/domain/entities/auth/response/login.response';
+import { SignUpResponse } from '@core/domain/entities/auth/response/signup.response';
 import { User } from '@core/domain/entities/user/user';
 import { handleApiError } from '@core/shared/helpers/errorHandler';
 import { ErrorResponse } from '@core/shared/interfaces/error-response.interface';
@@ -16,10 +17,10 @@ const authService = {
     }
   },
 
-  async signUp(data: SignUpRequest): Promise<User | ErrorResponse> {
+  async signUp(data: SignUpRequest): Promise<SignUpResponse | ErrorResponse> {
     try {
-      const response = await apiUrl.post<{ data: User }>('/auth/signup', data);
-      return response.data.data;
+      const response = await apiUrl.post<SignUpResponse>('/auth/signup', data);
+      return response.data;
     } catch (error) {
       throw handleApiError(error);
     }

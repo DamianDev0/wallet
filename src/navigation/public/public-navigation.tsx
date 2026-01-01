@@ -5,6 +5,7 @@ import Onboarding from '@screens/public/Onboarding';
 import Welcome from '@screens/public/Welcome';
 import SignUp from '@screens/public/SignUp';
 import Login from '@screens/public/Login';
+import ConnectBank from '@screens/public/ConnectBank';
 
 const Stack = createNativeStackNavigator<PublicNavigationRoutes>();
 
@@ -33,6 +34,7 @@ export const PublicNavigation = () => {
       />
       <Stack.Screen name="SignUp" component={SignUp}  />
       <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="ConnectBank" component={ConnectBank} />
     </Stack.Navigator>
   );
 };

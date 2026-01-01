@@ -54,12 +54,13 @@ export const useSignUp = () => {
         return;
       }
 
-      if ('id' in data && 'email' in data) {
+      // El backend devuelve ApiResponse<User> = { code, message, data: User, timestamp, path }
+      if ('data' in data && data.data) {
         // Guardar usuario en cache de TanStack Query
-        queryClient.setQueryData(QUERY_KEYS.AUTH.ME, data);
+        queryClient.setQueryData(QUERY_KEYS.AUTH.ME, data.data);
 
         // Guardar usuario en Zustand store
-        setUser(data);
+        setUser(data.data);
       }
     },
     onError: (error: ErrorResponse) => {

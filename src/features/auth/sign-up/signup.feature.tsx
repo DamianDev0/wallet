@@ -1,16 +1,24 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { View, Image } from 'react-native';
-import { Container, Text, Input, Button, Link } from '@components/index';
+import { Container, Text, Link, Form } from '@components/index';
 import { ScreenHeader } from '@components/organisms';
 import useNavigationHook from '@hooks/use-navigation';
 import { signupStyles } from './styles/signup.styles';
+import { createSignUpFormConfig } from '../config/form-signup.config';
+import { useSignUpHandler } from './hooks/useSignUpHandler';
 
 const SignUpFeature = () => {
   const navigation = useNavigationHook();
+  const { handleSignUp } = useSignUpHandler();
 
   const handleLogin = () => {
     navigation.navigate('Login');
   };
+
+  const signupFormConfig = useMemo(
+    () => createSignUpFormConfig(handleSignUp),
+    [handleSignUp]
+  );
 
   return (
     <Container>
@@ -35,24 +43,7 @@ const SignUpFeature = () => {
 
           <View style={signupStyles.formContainer}>
             <View style={signupStyles.form}>
-              <Input
-                placeholder="Full Name"
-                autoCapitalize="words"
-                height={48}
-              />
-              <Input
-                placeholder="Email"
-                keyboardType="email-address"
-                autoCapitalize="none"
-                height={48}
-              />
-              <Input
-                placeholder="Password"
-                secureTextEntry
-                height={48}
-              />
-
-              <Button title="Sign Up" variant="primary" fullWidth size="lg" />
+              <Form config={signupFormConfig} spacing={16} />
 
               <View style={signupStyles.dividerContainer}>
                 <View style={signupStyles.dividerLine} />

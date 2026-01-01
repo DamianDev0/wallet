@@ -3,4 +3,5 @@ export type PublicNavigationRoutes = {
     Welcome: undefined;
     SignUp: undefined;
     Login: undefined;
+    ConnectBank: undefined;
 }
