@@ -8,7 +8,7 @@ export const useSignUpHandler = () => {
   const { mutate: signUp, isPending } = useSignUp();
   const { showToast } = useToast();
   const navigation = useNavigationHook();
-  const { setUser } = useAuthStore();
+  const { setTempUser } = useAuthStore();
   const isProcessingRef = useRef(false);
 
   const handleSignUp = useCallback(
@@ -29,10 +29,9 @@ export const useSignUpHandler = () => {
           {
             onSuccess: (response) => {
               isProcessingRef.current = false;
-              // El backend devuelve ApiResponse<User> = { code, message, data: User }
+     
               if ('data' in response && response.data) {
-                // Guardar el usuario en el store para tener acceso al ID
-                setUser(response.data);
+                setTempUser(response.data);
 
                 showToast({
                   type: 'success',
@@ -42,7 +41,6 @@ export const useSignUpHandler = () => {
                   duration: 3000,
                 });
 
-                // Navegar directamente a ConnectBank con el customer recién creado
                 navigation.navigate('ConnectBank');
                 resolve();
               } else {
@@ -64,7 +62,7 @@ export const useSignUpHandler = () => {
         );
       });
     },
-    [signUp, showToast, navigation, setUser, isPending]
+    [signUp, showToast, navigation, setTempUser, isPending]
   );
 
   return {

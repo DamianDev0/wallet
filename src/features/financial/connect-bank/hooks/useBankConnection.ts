@@ -5,26 +5,27 @@ import useNavigationHook from '@hooks/use-navigation';
 import { useAuthStore } from '@core/shared/store/auth.store';
 
 export const useBankConnection = () => {
-  const { user } = useAuthStore();
+  const { user, tempUser, clearAuth } = useAuthStore();
   const navigation = useNavigationHook();
   const { showToast } = useToast();
-  const { mutate: getToken, isPending: isGettingToken } = useWidgetToken(user?.id || '');
-  const { mutate: linkBank, isPending: isLinking } = useLinkBankAccount(user?.id || '');
+  const customerId = tempUser?.id || user?.id || '';
+
+  const { mutate: getToken, isPending: isGettingToken } = useWidgetToken(customerId);
+  const { mutate: linkBank, isPending: isLinking } = useLinkBankAccount(customerId);
 
   const [widgetToken, setWidgetToken] = useState<string | null>(null);
   const [showWidget, setShowWidget] = useState(false);
   const isProcessingRef = useRef(false);
 
   const handleGetWidgetToken = useCallback(() => {
-    if (isProcessingRef.current || !user?.id) {
-      return;
-    }
+    if (isProcessingRef.current || !customerId) return;
 
     isProcessingRef.current = true;
 
     getToken(undefined, {
       onSuccess: (response) => {
         isProcessingRef.current = false;
+
         if ('access_token' in response) {
           setWidgetToken(response.access_token);
           setShowWidget(true);
@@ -49,11 +50,11 @@ export const useBankConnection = () => {
         });
       },
     });
-  }, [user?.id, getToken, showToast]);
+  }, [customerId, getToken, showToast]);
 
   const handleWidgetSuccess = useCallback(
     (linkId: string, institution: string) => {
-      if (!user?.id) return;
+      if (!customerId) return;
 
       linkBank(
         { link_id: linkId },
@@ -67,8 +68,9 @@ export const useBankConnection = () => {
                 position: 'top',
                 duration: 3000,
               });
+
+              clearAuth();
               setShowWidget(false);
-              // Navegar a Login después de conectar el banco exitosamente
               navigation.navigate('Login');
             }
           },
@@ -85,7 +87,7 @@ export const useBankConnection = () => {
         }
       );
     },
-    [user?.id, linkBank, showToast, navigation]
+    [customerId, linkBank, showToast, navigation, clearAuth]
   );
 
   const handleWidgetExit = useCallback(() => {
@@ -100,7 +102,7 @@ export const useBankConnection = () => {
   }, [showToast]);
 
   const handleWidgetError = useCallback(
-    (error: string, errorMessage: string) => {
+    (_error: string, errorMessage: string) => {
       setShowWidget(false);
       showToast({
         type: 'error',

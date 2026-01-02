@@ -2,12 +2,10 @@ import React from 'react';
 import { View, Image } from 'react-native';
 import { Container, Text, Button, BelvoWidget } from '@components/index';
 import { ScreenHeader } from '@components/organisms';
-import useNavigationHook from '@hooks/use-navigation';
 import { connectBankStyles } from './styles/connect-bank.styles';
 import { useBankConnection } from './hooks/useBankConnection';
 
 const ConnectBankFeature = () => {
-  const navigation = useNavigationHook();
   const {
     widgetToken,
     showWidget,
@@ -19,10 +17,6 @@ const ConnectBankFeature = () => {
     handleWidgetError,
   } = useBankConnection();
 
-  const handleSkip = () => {
-    navigation.navigate('Home');
-  };
-
   if (showWidget && widgetToken) {
     return (
       <View style={connectBankStyles.widgetContainer}>
@@ -32,9 +26,15 @@ const ConnectBankFeature = () => {
         <View style={connectBankStyles.widgetContent}>
           <BelvoWidget
             accessToken={widgetToken}
-            onSuccess={handleWidgetSuccess}
+            redirectUrl="myapp://belvo"
+            payload={{
+              locale: 'es',
+            }}
+            onSuccess={(link, institution) =>
+              handleWidgetSuccess(link, institution)
+            }
             onExit={handleWidgetExit}
-            onError={handleWidgetError}
+            onError={(error, message) => handleWidgetError(error, message)}
           />
         </View>
       </View>
@@ -51,7 +51,8 @@ const ConnectBankFeature = () => {
               Connect{'\n'}Your Bank
             </Text>
             <Text variant="body-lg" style={connectBankStyles.description}>
-              Link your bank account securely to manage your finances in one place
+              Link your bank account securely to manage your finances in one
+              place
             </Text>
           </View>
 
@@ -74,19 +75,15 @@ const ConnectBankFeature = () => {
 
         <View style={connectBankStyles.buttonContainer}>
           <Button
-            title={isGettingToken || isLinking ? 'Connecting...' : 'Connect Bank Account'}
+            title={
+              isGettingToken || isLinking
+                ? 'Connecting...'
+                : 'Connect Bank Account'
+            }
             variant="primary"
             fullWidth
             size="lg"
             onPress={handleGetWidgetToken}
-            disabled={isGettingToken || isLinking}
-          />
-          <Button
-            title="Skip for now"
-            variant="outline"
-            fullWidth
-            size="lg"
-            onPress={handleSkip}
             disabled={isGettingToken || isLinking}
           />
         </View>

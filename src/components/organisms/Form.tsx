@@ -41,6 +41,7 @@ export const Form = ({ config, spacing = 16 }: FormProps) => {
             rightIcon={field.icon?.right}
             onRightIconPress={field.icon?.onRightPress}
             secureTextEntry={field.type === 'password'}
+            placeholderSize={field.inputProps?.placeholderSize}
             keyboardType={
               field.type === 'email'
                 ? 'email-address'
@@ -107,7 +108,7 @@ export const Form = ({ config, spacing = 16 }: FormProps) => {
         title={submitButtonText}
         variant={submitButtonVariant}
         fullWidth
-        size="lg"
+        size="md"
         onPress={() => handleSubmit(onSubmit)}
         disabled={isSubmitting}
         loading={isSubmitting}

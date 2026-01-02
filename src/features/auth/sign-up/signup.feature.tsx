@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { View, Image } from 'react-native';
-import { Container, Text, Link, Form } from '@components/index';
+import { Container, Text, Link, Form, GoogleButton } from '@components/index';
 import { ScreenHeader } from '@components/organisms';
 import useNavigationHook from '@hooks/use-navigation';
 import { signupStyles } from './styles/signup.styles';
@@ -43,32 +43,32 @@ const SignUpFeature = () => {
 
           <View style={signupStyles.formContainer}>
             <View style={signupStyles.form}>
-              <Form config={signupFormConfig} spacing={16} />
+              <Form config={signupFormConfig} spacing={18} />
 
               <View style={signupStyles.dividerContainer}>
                 <View style={signupStyles.dividerLine} />
-                {/* <Text variant="body-sm" style={signupStyles.dividerText}>
+                <Text variant="body-sm" style={signupStyles.dividerText}>
                   or continue with
-                </Text> */}
+                </Text>
                 <View style={signupStyles.dividerLine} />
               </View>
 
-              {/* <GoogleButton
+              <GoogleButton
                 title="Sign Up with Google"
                 size="md"
-              /> */}
+                textWeight="medium"
+              />
 
               <View style={signupStyles.loginTextContainer}>
-                <Text variant="body-md" style={signupStyles.loginText}>
+                <Text variant="body-sm" style={signupStyles.loginText}>
                   Already have an account?{' '}
-                  <Link onPress={handleLogin} variant='body-md' >Login</Link>
+                  <Link onPress={handleLogin} variant='body-sm' >Login</Link>
                 </Text>
               </View>
             </View>
           </View>
         </View>
 
-        <View style={signupStyles.footer} />
       </View>
     </Container>
   );

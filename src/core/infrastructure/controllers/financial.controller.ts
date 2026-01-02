@@ -1,4 +1,5 @@
 import {
+  GetBelvoCredentialsUseCase,
   GetWidgetTokenUseCase,
   LinkBankAccountUseCase,
   UnlinkBankAccountUseCase,
@@ -8,6 +9,7 @@ import {
 } from '@core/application/useCases/financial.useCases';
 import { FinancialRepositoryImp } from '../repositories/financial.repositoryImp';
 import { WidgetToken } from '@core/domain/entities/financial/widget-token';
+import { BelvoCredentials } from '@core/domain/entities/financial/belvo-credentials';
 import { BankLinkRequest, BankLinkResponse } from '@core/domain/entities/financial/bank-link';
 import { LinkStatus } from '@core/domain/entities/financial/link-status';
 import { Account } from '@core/domain/entities/financial/account';
@@ -17,6 +19,10 @@ import { ErrorResponse } from '@core/shared/interfaces/error-response.interface'
 const financialRepository = new FinancialRepositoryImp();
 
 export class FinancialController {
+  async getBelvoCredentials(customerId: string): Promise<BelvoCredentials | ErrorResponse> {
+    return await GetBelvoCredentialsUseCase(financialRepository, customerId);
+  }
+
   async getWidgetToken(customerId: string): Promise<WidgetToken | ErrorResponse> {
     return await GetWidgetTokenUseCase(financialRepository, customerId);
   }

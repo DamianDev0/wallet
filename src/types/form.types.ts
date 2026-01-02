@@ -26,6 +26,7 @@ export interface FieldConfig {
   options?: Array<{ label: string; value: any }>;
   inputProps?: Omit<TextInputProps, 'value' | 'onChangeText'> & {
     height?: number;
+    placeholderSize?: number;
   };
   disabled?: boolean;
   hidden?: boolean;

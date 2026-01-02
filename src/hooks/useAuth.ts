@@ -7,7 +7,7 @@ import { useAuthStore } from '@core/shared/store/auth.store';
 
 const authController = new AuthController();
 
-// Query Keys
+
 const QUERY_KEYS = {
   AUTH: {
     ME: ['auth', 'me'] as const,
@@ -31,7 +31,7 @@ export const useLogin = () => {
       if ('data' in data) {
         queryClient.setQueryData(QUERY_KEYS.AUTH.ME, data.data.accessToken);
 
-        // save token in zustant store
+
         setAuth(data.data.accessToken);
       }
     },
@@ -41,26 +41,25 @@ export const useLogin = () => {
   });
 };
 
-// Hook para signup
 export const useSignUp = () => {
   const queryClient = useQueryClient();
-  const { setUser } = useAuthStore();
+  const { setTempUser } = useAuthStore();
 
   return useMutation({
     mutationFn: (credentials: SignUpRequest) => authController.signUp(credentials),
     onSuccess: (data) => {
-      // Verificar si es un error
+
       if ('statusCode' in data && data.statusCode >= 400) {
         return;
       }
 
-      // El backend devuelve ApiResponse<User> = { code, message, data: User, timestamp, path }
+     
       if ('data' in data && data.data) {
-        // Guardar usuario en cache de TanStack Query
+        
         queryClient.setQueryData(QUERY_KEYS.AUTH.ME, data.data);
 
-        // Guardar usuario en Zustand store
-        setUser(data.data);
+       
+        setTempUser(data.data);
       }
     },
     onError: (error: ErrorResponse) => {

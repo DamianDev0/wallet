@@ -15,6 +15,7 @@ const QUERY_KEYS = {
   },
 } as const;
 
+
 export const useWidgetToken = (customerId: string) => {
   return useMutation({
     mutationFn: () => financialController.getWidgetToken(customerId),

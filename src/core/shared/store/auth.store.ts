@@ -7,12 +7,14 @@ interface AuthState {
   accessToken: string | null;
   user: User | null;
   isAuthenticated: boolean;
+  tempUser: User | null; 
 }
 
 interface AuthActions {
   setToken: (token: string) => void;
   setUser: (user: User) => void;
   setAuth: (token: string) => void;
+  setTempUser: (user: User) => void; 
   clearAuth: () => void;
   getToken: () => string | null;
 }
@@ -26,6 +28,7 @@ export const useAuthStore = create<AuthStore>()(
       accessToken: null,
       user: null,
       isAuthenticated: false,
+      tempUser: null,
 
       // Actions
       setToken: (token: string) =>
@@ -43,8 +46,14 @@ export const useAuthStore = create<AuthStore>()(
       setAuth: (token: string) =>
         set({
           accessToken: token,
-      
+
           isAuthenticated: true,
+        }),
+
+      setTempUser: (user: User) =>
+        set({
+          tempUser: user,
+          isAuthenticated: false, 
         }),
 
       clearAuth: () =>
@@ -52,6 +61,7 @@ export const useAuthStore = create<AuthStore>()(
           accessToken: null,
           user: null,
           isAuthenticated: false,
+          tempUser: null,
         }),
 
       getToken: () => get().accessToken,
@@ -63,6 +73,7 @@ export const useAuthStore = create<AuthStore>()(
         accessToken: state.accessToken,
         user: state.user,
         isAuthenticated: state.isAuthenticated,
+        tempUser: state.tempUser, 
       }),
     }
   )

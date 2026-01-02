@@ -12,6 +12,7 @@ export const loginFormFields: FieldConfig[] = [
     ],
     inputProps: {
       height: 48,
+       placeholderSize: 15,
     },
   },
   {
@@ -25,6 +26,7 @@ export const loginFormFields: FieldConfig[] = [
     ],
     inputProps: {
       height: 48,
+      placeholderSize: 15,
     },
   },
 ];

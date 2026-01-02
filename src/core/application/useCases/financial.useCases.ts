@@ -1,10 +1,18 @@
 import { FinancialRepository } from '@core/domain/repositories/financial.repository';
 import { WidgetToken } from '@core/domain/entities/financial/widget-token';
+import { BelvoCredentials } from '@core/domain/entities/financial/belvo-credentials';
 import { BankLinkRequest, BankLinkResponse } from '@core/domain/entities/financial/bank-link';
 import { LinkStatus } from '@core/domain/entities/financial/link-status';
 import { Account } from '@core/domain/entities/financial/account';
 import { Transaction } from '@core/domain/entities/financial/transaction';
 import { ErrorResponse } from '@core/shared/interfaces/error-response.interface';
+
+export const GetBelvoCredentialsUseCase = (
+  financialRepository: FinancialRepository,
+  customerId: string
+): Promise<BelvoCredentials | ErrorResponse> => {
+  return financialRepository.getBelvoCredentials(customerId);
+};
 
 export const GetWidgetTokenUseCase = (
   financialRepository: FinancialRepository,

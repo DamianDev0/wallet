@@ -1,64 +1,70 @@
-import { StyleSheet, Dimensions } from 'react-native';
+import { height, width } from '@utils/dimensios';
+import { StyleSheet } from 'react-native';
 
-const { width, height } = Dimensions.get('window');
 
 export const signupStyles = StyleSheet.create({
   container: {
     flex: 1,
   },
+
   welcomeTextContainer: {
     marginTop: height * 0.03,
     paddingHorizontal: width * 0.06,
   },
+
   content: {
     flex: 1,
-    justifyContent: 'space-between',
     alignItems: 'center',
-    paddingTop: height * 0.01,
   },
+
   imageContainer: {
-    width: width * 1,
-    height: height * 0.36,
+    width: '100%',
+    height: height * 0.3,
     justifyContent: 'center',
     alignItems: 'center',
+    marginTop: height * 0.015,
   },
+
   image: {
-    width: width * 1.7,
+    width: width * 0.9,
     height: '100%',
   },
+
   formContainer: {
-    width: width * 1,
-    paddingHorizontal: width * 0.08,
-    paddingVertical: height * 0.03,
-    paddingBottom: height * 0.04,
+    width: '100%',
+    paddingHorizontal: width * 0.05,
+    paddingTop: height * 0.01,
+    paddingBottom: height * 0.035,
   },
+
   form: {
     width: '100%',
-    gap: 12,
+    gap: 10,
   },
+
   dividerContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginVertical: height * 0.005,
+    marginVertical: height * 0.015,
   },
+
   dividerLine: {
     flex: 1,
     height: 1,
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    backgroundColor: 'rgba(0,0,0,0.08)',
   },
+
   dividerText: {
     marginHorizontal: width * 0.03,
     opacity: 0.5,
   },
+
   loginTextContainer: {
     alignItems: 'center',
-    marginTop: height * 0.01,
+    marginTop: height * 0.015,
   },
+
   loginText: {
     textAlign: 'center',
-  },
-  footer: {
-    paddingBottom: 0,
-    alignItems: 'center',
   },
 });

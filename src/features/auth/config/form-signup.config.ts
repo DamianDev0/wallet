@@ -13,6 +13,7 @@ export const signupFormFields: FieldConfig[] = [
     inputProps: {
       height: 48,
       autoCapitalize: 'words',
+      placeholderSize: 15,
     },
   },
   {
@@ -26,6 +27,7 @@ export const signupFormFields: FieldConfig[] = [
     ],
     inputProps: {
       height: 48,
+      placeholderSize: 15,
     },
   },
   {
@@ -39,6 +41,7 @@ export const signupFormFields: FieldConfig[] = [
     ],
     inputProps: {
       height: 48,
+      placeholderSize: 15,
     },
   },
 ];

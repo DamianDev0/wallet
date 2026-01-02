@@ -1,87 +1,79 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { View, StyleSheet, ActivityIndicator } from 'react-native';
 import { WebView } from 'react-native-webview';
-import { StyleSheet, View, ActivityIndicator } from 'react-native';
 import { URL } from 'react-native-url-polyfill';
 
 interface BelvoWidgetProps {
   accessToken: string;
+  payload?: Record<string, string>;
+  redirectUrl: string;
   onSuccess: (linkId: string, institution: string) => void;
   onExit: () => void;
   onError: (error: string, errorMessage: string) => void;
-  callbackUrl?: string;
-  locale?: string;
-  institution?: string;
 }
 
 const BelvoWidget: React.FC<BelvoWidgetProps> = ({
   accessToken,
+  payload = {},
+  redirectUrl,
   onSuccess,
   onExit,
   onError,
-  callbackUrl = 'myapp://belvo',
-  locale = 'es',
-  institution,
 }) => {
-  const [widgetUri, setWidgetUri] = useState('');
-  const [isLoading, setIsLoading] = useState(true);
+  const [belvoUri, setBelvoUri] = useState('');
 
   useEffect(() => {
-    const buildWidgetUrl = () => {
-      const baseUrl = `https://widget.belvo.io/?access_token=${accessToken}`;
-      const params = new URLSearchParams({
-        callback: callbackUrl,
-        locale,
-      });
+    const buildPayload = (data: Record<string, string>) =>
+      Object.keys(data)
+        .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
+        .join('&');
 
-      if (institution) {
-        params.append('institution', institution);
-      }
+    const baseUrl = `https://widget.belvo.io/?access_token=${accessToken}&redirect_url=${encodeURIComponent(
+      redirectUrl,
+    )}`;
 
-      return `${baseUrl}&${params.toString()}`;
-    };
+    const finalUrl =
+      Object.keys(payload).length > 0
+        ? `${baseUrl}&${buildPayload(payload)}`
+        : baseUrl;
 
-    setWidgetUri(buildWidgetUrl());
-  }, [accessToken, callbackUrl, locale, institution]);
+    setBelvoUri(finalUrl);
+  }, [accessToken, payload, redirectUrl]);
 
-  const handleBelvoEvent = (event: any): boolean => {
-    try {
-      const webviewEvent = new URL(event.url);
+  const handleBelvoEvent = (event: any) => {
+    const url = new URL(event.url);
 
-      if (webviewEvent.protocol === 'myapp:') {
-        const parseParams = Object.fromEntries(webviewEvent.searchParams);
+    if (url.protocol === `${new URL(redirectUrl).protocol}`) {
+      const params = Object.fromEntries(url.searchParams.entries());
 
-        switch (webviewEvent.hostname) {
-          case 'success':
-            const { link, institution: inst } = parseParams;
-            if (link && inst) {
-              onSuccess(link, inst);
-            }
-            return false;
-
-          case 'exit':
-            onExit();
-            return false;
-
-          case 'error':
-            const { error, error_message } = parseParams;
-            onError(error || 'Unknown error', error_message || 'An error occurred');
-            return false;
-
-          default:
-            return true;
+      if (url.hostname === 'success') {
+        const { link, institution } = params;
+        if (link && institution) {
+          onSuccess(link, institution);
         }
+        return false;
       }
-      return true;
-    } catch (error) {
-      console.error('Error handling Belvo event:', error);
-      return true;
+
+      if (url.hostname === 'exit') {
+        onExit();
+        return false;
+      }
+
+      if (url.hostname === 'error') {
+        onError(params.error || 'unknown_error', params.error_message || 'Unknown error');
+        return false;
+      }
+
+      return false;
     }
+
+    return true;
   };
 
-  if (!widgetUri) {
+  if (!belvoUri) {
     return (
-      <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="#0066FF" />
+      <View style={styles.loading}>
+        <ActivityIndicator size="large" />
       </View>
     );
   }
@@ -89,18 +81,15 @@ const BelvoWidget: React.FC<BelvoWidgetProps> = ({
   return (
     <View style={styles.container}>
       <WebView
-        source={{ uri: widgetUri }}
-        originWhitelist={['myapp://*']}
+        source={{ uri: belvoUri }}
+        originWhitelist={[`${redirectUrl.split(':')[0]}://*`]}
         onShouldStartLoadWithRequest={handleBelvoEvent}
-        onLoadStart={() => setIsLoading(true)}
-        onLoadEnd={() => setIsLoading(false)}
-        style={styles.webview}
         javaScriptEnabled
         domStorageEnabled
         startInLoadingState
         renderLoading={() => (
-          <View style={styles.loadingContainer}>
-            <ActivityIndicator size="large" color="#0066FF" />
+          <View style={styles.loading}>
+            <ActivityIndicator size="large" />
           </View>
         )}
       />
@@ -112,14 +101,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  webview: {
-    flex: 1,
-  },
-  loadingContainer: {
+  loading: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#FFFFFF',
   },
 });
 

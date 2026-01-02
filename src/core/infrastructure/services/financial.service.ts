@@ -1,5 +1,6 @@
 import apiUrl from '@core/config/api-url';
-import { WidgetToken } from '@core/domain/entities/financial/widget-token';
+import { WidgetToken, WidgetTokenResponse } from '@core/domain/entities/financial/widget-token';
+import { BelvoCredentials, BelvoCredentialsResponse } from '@core/domain/entities/financial/belvo-credentials';
 import { BankLinkRequest, BankLinkResponse } from '@core/domain/entities/financial/bank-link';
 import { LinkStatus } from '@core/domain/entities/financial/link-status';
 import { Account } from '@core/domain/entities/financial/account';
@@ -8,12 +9,23 @@ import { handleApiError } from '@core/shared/helpers/errorHandler';
 import { ErrorResponse } from '@core/shared/interfaces/error-response.interface';
 
 const financialService = {
+  async getBelvoCredentials(customerId: string): Promise<BelvoCredentials | ErrorResponse> {
+    try {
+      const response = await apiUrl.get<BelvoCredentialsResponse>(
+        `/customers/${customerId}/financial/belvo-credentials`
+      );
+      return response.data.data;
+    } catch (error) {
+      throw handleApiError(error);
+    }
+  },
+
   async getWidgetToken(customerId: string): Promise<WidgetToken | ErrorResponse> {
     try {
-      const response = await apiUrl.post<WidgetToken>(
-        `/customers/${customerId}/financial/widget/token`
+      const response = await apiUrl.post<WidgetTokenResponse>(
+        `/customers/${customerId}/financial/widget-token`
       );
-      return response.data;
+      return response.data.data;
     } catch (error) {
       throw handleApiError(error);
     }
