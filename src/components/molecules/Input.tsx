@@ -17,6 +17,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { useTheme } from '../../contexts/ThemeContext';
 import { Text } from '../atoms/Text';
+import { Eye, EyeOff } from 'lucide-react-native';
 
 const AnimatedView = Animated.createAnimatedComponent(View);
 
@@ -41,10 +42,14 @@ export const Input = ({
   width = '100%',
   height = 48,
   placeholderSize,
+  secureTextEntry,
   ...props
 }: InputProps) => {
   const { theme } = useTheme();
   const [isFocused, setIsFocused] = useState(false);
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
+  const isPassword = secureTextEntry === true;
 
   const scale = useSharedValue(1);
   const borderWidth = useSharedValue(1);
@@ -110,8 +115,10 @@ export const Input = ({
             height,
           },
           animatedStyle,
-        ]}>
+        ]}
+      >
         {leftIcon && <View style={styles.leftIcon}>{leftIcon}</View>}
+
         <TextInput
           style={[
             styles.input,
@@ -121,23 +128,39 @@ export const Input = ({
               fontSize: placeholderSize || theme.typography.sizes.base,
             },
             leftIcon ? styles.inputWithLeftIcon : undefined,
-            rightIcon ? styles.inputWithRightIcon : undefined,
+            (rightIcon || isPassword) ? styles.inputWithRightIcon : undefined,
             style,
           ]}
           placeholderTextColor={theme.colors.textSecondary}
           onFocus={handleFocus}
           onBlur={handleBlur}
+          secureTextEntry={isPassword && !isPasswordVisible}
           {...props}
         />
-        {rightIcon && (
+
+        {(rightIcon || isPassword) && (
           <Pressable
-            onPress={onRightIconPress}
+            onPress={
+              isPassword
+                ? () => setIsPasswordVisible(prev => !prev)
+                : onRightIconPress
+            }
             style={styles.rightIcon}
-            disabled={!onRightIconPress}>
-            {rightIcon}
+            disabled={!isPassword && !onRightIconPress}
+          >
+            {isPassword ? (
+              isPasswordVisible ? (
+                <EyeOff size={18} color={theme.colors.textSecondary} />
+              ) : (
+                <Eye size={18} color={theme.colors.textSecondary} />
+              )
+            ) : (
+              rightIcon
+            )}
           </Pressable>
         )}
       </AnimatedView>
+
       {error && (
         <Text variant="caption" style={[styles.errorText, { color: theme.colors.danger }]}>
           {error}

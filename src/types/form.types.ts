@@ -17,6 +17,7 @@ export interface FieldConfig {
   label?: string;
   placeholder?: string;
   defaultValue?: any;
+  secureTextEntry?: boolean;
   validations?: ValidationRule[];
   icon?: {
     left?: React.ReactNode;

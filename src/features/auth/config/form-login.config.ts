@@ -19,6 +19,7 @@ export const loginFormFields: FieldConfig[] = [
     name: 'password',
     type: 'password',
     placeholder: 'Password',
+    secureTextEntry: true,
     defaultValue: '',
     validations: [
       { type: 'required', message: 'Password is required' },
