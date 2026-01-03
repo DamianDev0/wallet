@@ -36,11 +36,11 @@ const financialService = {
     data: BankLinkRequest
   ): Promise<BankLinkResponse | ErrorResponse> {
     try {
-      const response = await apiUrl.post<BankLinkResponse>(
+      const response = await apiUrl.post<{ data: BankLinkResponse }>(
         `/customers/${customerId}/financial/link`,
         data
       );
-      return response.data;
+      return response.data.data;
     } catch (error) {
       throw handleApiError(error);
     }
