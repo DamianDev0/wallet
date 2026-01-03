@@ -2,72 +2,119 @@ import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, ActivityIndicator } from 'react-native';
 import { WebView } from 'react-native-webview';
 import { URL } from 'react-native-url-polyfill';
+import {
+  BELVO_REDIRECT_URL,
+  BELVO_DEFAULT_PAYLOAD,
+  BelvoEventType,
+} from '@core/config/belvo.config';
 
 interface BelvoWidgetProps {
   accessToken: string;
   payload?: Record<string, string>;
-  redirectUrl: string;
+  redirectUrl?: string;
   onSuccess: (linkId: string, institution: string) => void;
   onExit: () => void;
   onError: (error: string, errorMessage: string) => void;
+  onEvent?: (eventName: string, metadata: any) => void;
 }
 
 const BelvoWidget: React.FC<BelvoWidgetProps> = ({
   accessToken,
-  payload = {},
-  redirectUrl,
+  payload,
+  redirectUrl = BELVO_REDIRECT_URL,
   onSuccess,
   onExit,
   onError,
+  onEvent,
 }) => {
   const [belvoUri, setBelvoUri] = useState('');
 
-  useEffect(() => {
-    const buildPayload = (data: Record<string, string>) =>
-      Object.keys(data)
-        .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
-        .join('&');
+  // Construye el payload
+  const buildPayload = (data: Record<string, string>) =>
+    Object.keys(data)
+      .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
+      .join('&');
 
-    const baseUrl = `https://widget.belvo.io/?access_token=${accessToken}&redirect_url=${encodeURIComponent(
-      redirectUrl,
-    )}`;
+  useEffect(() => {
+    const baseUrl = `https://widget.belvo.io/?access_token=${accessToken}`;
+
+    // Combina el payload por defecto con el payload personalizado
+    const finalPayload = { ...BELVO_DEFAULT_PAYLOAD, ...payload };
 
     const finalUrl =
-      Object.keys(payload).length > 0
-        ? `${baseUrl}&${buildPayload(payload)}`
+      Object.keys(finalPayload).length > 0
+        ? `${baseUrl}&${buildPayload(finalPayload)}`
         : baseUrl;
 
     setBelvoUri(finalUrl);
-  }, [accessToken, payload, redirectUrl]);
+  }, [accessToken, payload]);
 
   const handleBelvoEvent = (event: any) => {
-    const url = new URL(event.url);
+    try {
+      const webviewEvent = new URL(event.url);
 
-    if (url.protocol === `${new URL(redirectUrl).protocol}`) {
-      const params = Object.fromEntries(url.searchParams.entries());
+      // Verificar si la URL usa nuestro esquema personalizado
+      if (webviewEvent.protocol === `${redirectUrl}:`) {
+        const parseParams = Object.fromEntries(webviewEvent.searchParams);
 
-      if (url.hostname === 'success') {
-        const { link, institution } = params;
-        if (link && institution) {
-          onSuccess(link, institution);
+        switch (webviewEvent.hostname) {
+          case 'success':
+            const { link, institution } = parseParams;
+            if (link && institution) {
+              console.log('[BelvoWidget] Success:', { link, institution });
+              onSuccess(link, institution);
+            }
+            return false;
+
+          case 'exit':
+            console.log('[BelvoWidget] Exit');
+            onExit();
+            return false;
+
+          case 'error':
+            const { error, error_message } = parseParams;
+            console.log('[BelvoWidget] Error:', { error, error_message });
+            onError(error || 'unknown_error', error_message || 'Unknown error');
+            return false;
         }
         return false;
       }
 
-      if (url.hostname === 'exit') {
-        onExit();
-        return false;
-      }
-
-      if (url.hostname === 'error') {
-        onError(params.error || 'unknown_error', params.error_message || 'Unknown error');
-        return false;
-      }
-
-      return false;
+      return true;
+    } catch (error) {
+      console.error('[BelvoWidget] Error handling Belvo event:', error);
+      return true;
     }
+  };
 
-    return true;
+  const handleWebViewMessage = (event: any) => {
+    try {
+      const data = JSON.parse(event.nativeEvent.data);
+      console.log('[BelvoWidget] Message received:', data);
+
+      if (data.eventName && onEvent) {
+        onEvent(data.eventName, data.metadata || data.meta_data);
+      }
+
+      // Manejar eventos específicos
+      if (data.eventName === BelvoEventType.ERROR) {
+        const { error_code, error_message, institution_name } = data.meta_data || {};
+        console.log('[BelvoWidget] Error event:', {
+          error_code,
+          error_message,
+          institution_name,
+        });
+      } else if (data.eventName === BelvoEventType.PAGE_LOAD) {
+        const { page, from, institution_name } = data.metadata || {};
+        console.log('[BelvoWidget] Page load:', {
+          page,
+          from,
+          institution_name,
+        });
+      }
+    } catch (error) {
+      console.error('[BelvoWidget] Error parsing message:', error);
+    }
   };
 
   if (!belvoUri) {
@@ -82,8 +129,7 @@ const BelvoWidget: React.FC<BelvoWidgetProps> = ({
     <View style={styles.container}>
       <WebView
         source={{ uri: belvoUri }}
-        originWhitelist={[`${redirectUrl.split(':')[0]}://*`]}
-        onShouldStartLoadWithRequest={handleBelvoEvent}
+        originWhitelist={[`${redirectUrl}://*`]}
         javaScriptEnabled
         domStorageEnabled
         startInLoadingState
@@ -92,6 +138,8 @@ const BelvoWidget: React.FC<BelvoWidgetProps> = ({
             <ActivityIndicator size="large" />
           </View>
         )}
+        onShouldStartLoadWithRequest={handleBelvoEvent}
+        onMessage={handleWebViewMessage}
       />
     </View>
   );

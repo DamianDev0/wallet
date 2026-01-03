@@ -26,8 +26,8 @@ export const useBankConnection = () => {
       onSuccess: (response) => {
         isProcessingRef.current = false;
 
-        if ('access_token' in response) {
-          setWidgetToken(response.access_token);
+        if ('access' in response) {
+          setWidgetToken(response.access);
           setShowWidget(true);
         } else {
           showToast({

@@ -1,7 +1,8 @@
 import { ApiResponse } from '@core/shared/interfaces/api-response.interface';
 
 export interface WidgetToken {
-  access_token: string;
+  access: string;
+  refresh: string;
   customer_id: string;
   external_id: string;
 }

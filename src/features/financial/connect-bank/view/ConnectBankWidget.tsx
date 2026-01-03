@@ -22,8 +22,6 @@ export const ConnectBankWidget = ({
       <View style={styles.widgetContent}>
         <BelvoWidget
           accessToken={widgetToken}
-          redirectUrl="myapp://belvo"
-          payload={{ locale: 'es' }}
           onSuccess={handleWidgetSuccess}
           onExit={handleWidgetExit}
           onError={handleWidgetError}

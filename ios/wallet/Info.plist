@@ -34,9 +34,23 @@
 		<true/>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string/>
+	<string></string>
 	<key>RCTNewArchEnabled</key>
 	<true/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Technor-Medium.otf</string>
+		<string>Technor-Semibold.otf</string>
+		<string>Poppins-Medium.otf</string>
+		<string>Poppins-SemiBold.otf</string>
+		<string>Poppins-Thin.otf</string>
+		<string>Poppins-Bold.otf</string>
+		<string>Poppins-Black.otf</string>
+		<string>Poppins-BlackItalic.otf</string>
+		<string>Poppins-Regular.otf</string>
+		<string>Technor-Regular.otf</string>
+		<string>Poppins-ExtraBold.otf</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -51,19 +65,16 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>UIAppFonts</key>
+	<key>CFBundleURLTypes</key>
 	<array>
-		<string>Technor-Medium.otf</string>
-		<string>Technor-Semibold.otf</string>
-		<string>Poppins-Medium.otf</string>
-		<string>Poppins-SemiBold.otf</string>
-		<string>Poppins-Thin.otf</string>
-		<string>Poppins-Bold.otf</string>
-		<string>Poppins-Black.otf</string>
-		<string>Poppins-BlackItalic.otf</string>
-		<string>Poppins-Regular.otf</string>
-		<string>Technor-Regular.otf</string>
-		<string>Poppins-ExtraBold.otf</string>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>myapp</string>
+			</array>
+			<key>CFBundleURLName</key>
+			<string>com.wallet.belvo</string>
+		</dict>
 	</array>
 </dict>
 </plist>
